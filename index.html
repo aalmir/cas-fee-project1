@@ -5,48 +5,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CasFee UVB Notes</title>
+    <title>Vanilla Notes</title>
     <link rel="stylesheet" href="app.css">
 
     <script id="notes-list-template" type="text/x-handlebars-template">
-        <ul>
+        <div>
+            <button type="button" data-command="create">Create new note</button>
+        </div>
+        <ul class="notes-list">
             {{#each this}}
             <li>
-                <h3>
-                    {{#if finished}}[finished]{{/if}}
-                    {{title}}
-                </h3>
+                <div class="note-title-row">
+                    <h1>
+                        <input type="checkbox" data-command="toggle-finished" data-note-id="{{id}}" 
+                            title="Toggle finished" {{#if finished}}checked="checked"{{/if}}>
+                        {{title}}
+                    </h1>
+                    <div class="note-properties">
+                        Prio {{priority}}{{#if dueDate}}, due {{dateFormat dueDate}}{{/if}}
+                    </div>
+                    <div class="note-buttons">
+                        <button type="button" data-command="edit" data-note-id="{{id}}">Edit</button>
+                        <button type="button" data-command="delete" data-note-id="{{id}}">Delete</button>
+                    </div>
+                </div>
                 <div>
                     {{description}}
+                </div>
+                <div>
                     (Created {{dateFormat createdDate}})
-                </div>
-                <div>
-                    Prio {{priority}} Due {{dateFormat dueDate}}
-                </div>
-                <div>
-                    <button type="button" data-command="edit" data-note-id="{{id}}">Edit</button>
-                    <button type="button" data-command="delete" data-note-id="{{id}}">Delete</button>
-                    <button type="button" data-command="toggle-finished" data-note-id="{{id}}">Toggle finished</button>
                 </div>
             </li>
             {{/each}}
         </ul>
+        <div id="debug-buttons">
+            DEBUG: 
+            <button type="button" data-command="reset">Seed</button>
+            <button type="button" data-command="clear">Clear</button>
+            <button type="button" data-command="load">Load</button>
+            <button type="button" data-command="home">Home-URL</button>
+            Length: 
+            {{length}}
+        </div>
     </script>
 
     <script id="notes-form-template" type="text/x-handlebars-template">
-        <form>
-            hello form
-            <div>Due date</div>
-            <div>Title</div>
-            <div>Details</div>
-            <div>Importance</div>
-            <div>Dreiecke?</div>
-            <label>
-                <input type="checkbox"> Finished
-            </label>
-            <button type="button" data-command="save">Save</button>
-            <button type="button" data-command="cancel">Cancel</button>
-        </form>
+        <div>
+            <div class="form-row">
+                <div class="form-label">Title</div>
+                <div class="form-value">
+                    <input type="text" name="title" value="{{title}}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-label">Details</div>
+                <div class="form-value">
+                    <textarea name="description">{{description}}</textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-label">Prio</div>
+                <div class="form-value">
+                    <label><input type="radio" name="priority" value="1" {{checkedwhen priority '1'}} required>1</label>
+                    <label><input type="radio" name="priority" value="2" {{checkedwhen priority '2'}} required>2</label>
+                    <label><input type="radio" name="priority" value="3" {{checkedwhen priority '3'}} required>3</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-label">Due date</div>
+                <div class="form-value">
+                    <input type="date" name="dueDate" value="{{dueDate}}">
+                </div>
+            </div>
+            <div>
+                <input type="hidden" name="id" value="{{id}}" />
+
+                <button type="submit" data-command="save">Save</button>
+                <button type="button" data-command="cancel">Cancel</button>
+            </div>
+        </div>
     </script>
 
 </head>
@@ -54,22 +91,23 @@
 <body class="white-theme">
 
     <header class="layout-header">
-        <h1>CasFee UVB Notes</h1>
+        <h1>Vanilla Notes</h1>
         <div id="theme-control">
+            Theme:
             <select>
-                <option value="white-theme">White Theme</option>
-                <option value="black-theme">Black Theme</option>
+                <option value="white-theme">Bright</option>
+                <option value="black-theme">Dark</option>
             </select>
         </div>
     </header>
 
     <div id="content">
         <div id="sort-buttons">
-            Sort order:
-            <button data-sort-order="title">By Title</button>
-            <button data-sort-order="dueDate">By Due Date</button>
-            <button data-sort-order="createdDate">By Created Date</button>
-            <button data-sort-order="priority">By Priority</button>
+            Sort by:
+            <button data-sort-order="title">Title</button>
+            <button data-sort-order="dueDate">Due Date</button>
+            <button data-sort-order="createdDate">Created</button>
+            <button data-sort-order="priority">Priority</button>
         </div>
 
         <div id="filter-buttons">
@@ -81,13 +119,13 @@
 
         <div id="list-container"></div>
 
-        <div id="form-container"></div>
+        <form id="notes-form"></form>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"
         integrity="sha256-qlku5J3WO/ehJpgXYoJWC2px3+bZquKChi4oIWrAKoI=" crossorigin="anonymous"></script>
     <script src="model.js"></script>
-    <script src="view.js"></script>
+    <script src="controller.js"></script>
 </body>
 
 </html>

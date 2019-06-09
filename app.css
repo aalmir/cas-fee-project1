@@ -1,50 +1,131 @@
-body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: white; 
-    color: #666666;
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  
+  body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: wheat; 
     padding: 0;
     margin: 0;
+    font-size: 18px;
+    line-height: 1.4;
 }
 
-
+button, select, input, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    border: 1px solid #f4732f;
+}
 
 button {
-    padding: 0.5em;
+    padding: 0.2em 1em 0.1em;
     border-radius: 0.5em; 
+    font-size: 0.7em;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
 
 header.layout-header {
-    background-color: #333333;
+    background-color: #f4732f;
     color: white;
     display: flex;
-    padding: 2vw;
+    padding: 1vw 3vw;
 }
 
 header.layout-header > h1 {
     flex: 1;
     font-size: 1em;
     margin: 0;
+    text-transform: uppercase
+}
+
+header.layout-header select {
+    background-color: #f4732f;
+    border-color: white;
 }
 
 #content {
-    padding: 2vw;
+    padding: 2vw 3vw;
 }
 
+/* List */
+
+#list-container {
+    margin-top: 1em;
+}
+
+ul.notes-list  {
+    list-style: none;
+    padding: 0;
+}
+
+ul.notes-list > li {
+    margin-bottom: 1em;
+}
+
+.note-title-row {
+    display: flex;
+}
+
+.note-title-row > h1  {
+    flex: 0 0 auto;
+    font-size: 1em;
+    margin: 0;
+}
+
+.note-title-row > .note-properties {
+    flex: 1 0 auto;
+    padding-left: 1em;
+}
+
+#debug-buttons {
+    background-color:white;
+    margin-top: 3em;
+    padding: 1em;
+}
+
+/* Form */
 
 #form-container {
     display: none; 
+    max-width: 30em;
 }
 
+.form-row {
+    display: flex; 
+}
+
+.form-label {
+    flex: 0 0 40%;
+}
+
+.form-value {
+    flex: 0 0 60%;
+}
+
+.form-value > select, .form-value > input[type=text], .form-value > textarea {
+    width: 100%
+}
+
+
+
+/* Theme */
 
 body.black-theme {
     background-color: #333333; 
     color: white;
 }
 
-body.black-theme button {
-    background-color: #666666;
+body.black-theme button, 
+body.black-theme select, 
+body.black-theme input,
+body.black-theme textarea {
+    background-color: #7a1010;
     border-color: #000000;
     color: white;
 }
