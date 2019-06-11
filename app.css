@@ -6,27 +6,40 @@ html {
   }
   
   body {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: wheat; 
+    font-family: Arial, Helvetica, sans-serif;
     padding: 0;
     margin: 0;
     font-size: 18px;
     line-height: 1.4;
 }
 
-button, select, input, textarea {
+select, input, textarea {
     font-family: inherit;
     font-size: inherit;
     color: inherit;
     border: 1px solid #f4732f;
 }
 
-button {
-    padding: 0.2em 1em 0.1em;
-    border-radius: 0.5em; 
-    font-size: 0.7em;
-    font-weight: bold;
+input[type=radio], input[type=checkbox] {
+    margin: 0em;
+}
+
+button, label.toggle-button {
+    background-color: inherit;
+    border: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: inherit;
+    color: #f4732f;
+    padding: 0;
+    margin-right: 1em;
+    font-size: 0.8em;
     text-transform: uppercase;
+    cursor: pointer;
+}
+
+.action-button {
+    font-weight: bold;
 }
 
 
@@ -51,7 +64,19 @@ header.layout-header select {
 
 #content {
     padding: 2vw 3vw;
+    max-width: 39em;
 }
+
+/* List Controls */
+.list-controls {
+    display: flex;
+}
+
+.list-control {
+    flex-grow: 1;
+    padding: 0.3em;
+}
+
 
 /* List */
 
@@ -65,29 +90,42 @@ ul.notes-list  {
 }
 
 ul.notes-list > li {
+    border: 1px solid white;
     margin-bottom: 1em;
+    padding: 0.1em;
+    background-color: #ffcf7c;
+}
+
+ul.notes-list > li.finished-true {
+    background-color: inherit;
+}
+
+.note-content {
+    padding: 0.3em 1em;
 }
 
 .note-title-row {
     display: flex;
+    justify-content: space-between;
 }
 
 .note-title-row > h1  {
-    flex: 0 0 auto;
     font-size: 1em;
     margin: 0;
+    flex: 1 1 auto;
 }
 
 .note-title-row > .note-properties {
-    flex: 1 0 auto;
     padding-left: 1em;
+    flex: 0 1 11em;
 }
 
-#debug-buttons {
-    background-color:white;
-    margin-top: 3em;
-    padding: 1em;
+.created-date {
+    font-size: 0.7em;
+    padding-top: 0.7em;
 }
+
+
 
 /* Form */
 
@@ -112,7 +150,13 @@ ul.notes-list > li {
     width: 100%
 }
 
+/* Misc */
 
+#debug-buttons {
+    border:1px dashed white;
+    margin-top: 3em;
+    padding: 1em;
+}
 
 /* Theme */
 
@@ -121,7 +165,6 @@ body.black-theme {
     color: white;
 }
 
-body.black-theme button, 
 body.black-theme select, 
 body.black-theme input,
 body.black-theme textarea {
@@ -129,3 +172,12 @@ body.black-theme textarea {
     border-color: #000000;
     color: white;
 }
+
+body.black-theme ul.notes-list > li {
+    background-color: #473316;
+}
+
+body.black-theme ul.notes-list > li.finished-true {
+    background-color: inherit;
+}
+

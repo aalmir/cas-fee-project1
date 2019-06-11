@@ -23,12 +23,12 @@ var Model = (function () {
         save();
     }
 
-    function reset() {
+    function seed() {
         notes = [
             {
                 "id": 1,
-                "title": "CAS FEE Projekt 1",
-                "description": "Lorem ipsum",
+                "title": "Vanille-Glacé",
+                "description": "",
                 "priority": 1,
                 "dueDate": new Date(2019, 7, 7),
                 "createdDate": new Date(2019, 5, 1),
@@ -36,13 +36,22 @@ var Model = (function () {
             },
             {
                 "id": 2,
-                "title": "Velo putzen",
-                "description": "Lorem ipsum dolor sit amet",
+                "title": "Schokoladensauce",
+                "description": "",
                 "priority": 2,
                 "dueDate": null,
                 "createdDate": new Date(2019, 5, 2),
-                "finished": true
+                "finished": false
             },
+            {
+                "id": 3,
+                "title": "Salat",
+                "description": "",
+                "priority": 3,
+                "dueDate": null,
+                "createdDate": new Date(2019, 5, 2),
+                "finished": false
+            }
         ];
         save();
     }
@@ -77,7 +86,7 @@ var Model = (function () {
     var notes = [];
     load();
     if(notes === null) {
-        notes = reset();
+        notes = seed();
     }
 
     /* Public API (revealing module pattern) */
@@ -130,8 +139,8 @@ var Model = (function () {
         clear: function() {
             clear();
         },
-        reset: function() {
-            reset();
+        seed: function() {
+            seed();
         }, 
         load: function() {
             load();

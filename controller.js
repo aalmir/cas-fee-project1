@@ -21,7 +21,7 @@ var Controller = (function () {
     const form = document.getElementById("notes-form");
 
     // View State (TODO: persist)
-    let sortOrder = "title";
+    let sortOrder = "priority";
     let showFinished = true;
     let theme = "white-theme";
 
@@ -42,8 +42,10 @@ var Controller = (function () {
         if (command) {
             switch (command) {
                 case 'delete': // TODO: magic string
-                    Model.delete(noteId)
-                    renderList();
+                    if(confirm("Do you really want to delete this note?")) {
+                        Model.delete(noteId)
+                        renderList();
+                    }
                     break;
                 case 'toggle-finished':
                     Model.toggleFinished(noteId)
@@ -60,8 +62,8 @@ var Controller = (function () {
                     const createFormModel = getDefaultFormModel();
                     renderForm(createFormModel);
                     break;
-                case 'reset':
-                    Model.reset();
+                case 'seed':
+                    Model.seed();
                     renderList();
                     break;
                 case 'clear':
@@ -189,11 +191,16 @@ var Controller = (function () {
     function init() {
         renderList();
 
-        // Wiring: 
+        // Handlers: 
+
         themeSelect.addEventListener("change", themeChangeHandler);
+
         sortButtons.addEventListener("click", sortClickHandler);
+        sortButtons.querySelectorAll(`[data-sort-order="${sortOrder}"]`)[0].checked = true;
+
         filterButtons.addEventListener("change", filterChangeHandler);
         filterButtons.querySelectorAll('[data-filter="showFinished"]')[0].checked = showFinished;
+
         listContainer.addEventListener("click", listClickHandler);
 
         form.addEventListener("click", formClickHandler);
