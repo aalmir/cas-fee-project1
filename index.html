@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vanilla Notes</title>
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"
+        integrity="sha256-qlku5J3WO/ehJpgXYoJWC2px3+bZquKChi4oIWrAKoI=" 
+        crossorigin="anonymous" defer></script>
+    
+    <script src="js/bootstrapper.js" type="module" defer></script>
 
     <script id="notes-list-template" type="text/x-handlebars-template">
         <div>
@@ -141,10 +147,6 @@
         <form id="notes-form"></form>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"
-        integrity="sha256-qlku5J3WO/ehJpgXYoJWC2px3+bZquKChi4oIWrAKoI=" crossorigin="anonymous"></script>
-    <script src="model.js"></script>
-    <script src="controller.js"></script>
 </body>
 
 </html>
