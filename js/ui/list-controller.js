@@ -57,7 +57,7 @@ export class ListController {
                     break;
                 case 'create':
                     this.hideList();
-                    this.router.showAddForm();
+                    this.router.showCreateForm();
                     break;
                 case 'seed':
                     this.noteService.seed();

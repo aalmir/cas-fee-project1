@@ -23,8 +23,8 @@ export class Router {
         this.formController.renderEditForm(noteId);
     }
 
-    showAddForm() {
-        this.formController.showAddForm();
+    showCreateForm() {
+        this.formController.renderCreateForm();
     }
 
 }

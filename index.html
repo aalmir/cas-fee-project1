@@ -15,8 +15,10 @@
     <script src="js/bootstrapper.js" type="module" defer></script>
 
     <script id="notes-list-template" type="text/x-handlebars-template">
-        <div>
-            <button type="button" class="action-button" data-command="create">Add new Note...</button>
+        <div id="top-buttons">
+            <button type="button" class="action-button" data-command="create">
+                Add new Note...
+            </button>
         </div>
         <ul class="notes-list">
             {{#each this}}
@@ -61,46 +63,53 @@
     </script>
 
     <script id="notes-form-template" type="text/x-handlebars-template">
-        <div>
-            <div class="form-row">
-                <div class="form-label">Title</div>
-                <div class="form-value">
-                    <input type="text" name="title" value="{{title}}" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label">Details</div>
-                <div class="form-value">
-                    <textarea name="description">{{description}}</textarea>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label">Prio</div>
-                <div class="form-value">
-                    <label>
-                        <input type="radio" name="priority" value="1" {{checkedwhen priority '1'}} required> 1
-                    </label>
-                    <label>
-                        <input type="radio" name="priority" value="2" {{checkedwhen priority '2'}} required> 2
-                    </label>
-                    <label>
-                        <input type="radio" name="priority" value="3" {{checkedwhen priority '3'}} required> 3
-                    </label>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label">Due date</div>
-                <div class="form-value">
-                    <input type="date" name="dueDate" value="{{dueDate}}">
-                </div>
+            <h1>
+                {{#if id}}
+                    <h1>Edit note</h1>
+                {{else}}
+                    <h1>Add new note</h1>
+                {{/if}}
             </div>
             <div>
+                <div class="form-row">
+                    <div class="form-label">Title</div>
+                    <div class="form-value">
+                        <input type="text" name="title" value="{{title}}" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label">Details</div>
+                    <div class="form-value">
+                        <textarea name="description">{{description}}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label">Prio</div>
+                    <div class="form-value">
+                        <label>
+                            <input type="radio" name="priority" value="1" {{checkedwhen priority '1'}} required> 1
+                        </label>
+                        <label>
+                            <input type="radio" name="priority" value="2" {{checkedwhen priority '2'}} required> 2
+                        </label>
+                        <label>
+                            <input type="radio" name="priority" value="3" {{checkedwhen priority '3'}} required> 3
+                        </label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label">Due date</div>
+                    <div class="form-value">
+                        <input type="date" name="dueDate" value="{{dueDate}}">
+                    </div>
+                </div>
+            </div>
+            <div class="form-button-row">
                 <input type="hidden" name="id" value="{{id}}" />
 
                 <button type="submit" class="action-button" data-command="save">Save</button>
                 <button type="button" class="" data-command="cancel">Cancel</button>
             </div>
-        </div>
     </script>
 
 </head>
