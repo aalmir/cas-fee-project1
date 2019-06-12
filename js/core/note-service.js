@@ -16,7 +16,6 @@ export class NoteService {
                 case "priority": return Note.compareByPriority;
                 case "dueDate": return Note.compareByDueDate;
                 case "createdDate": return Note.compareByCreatedDate;
-                case "title": return Note.compareByTitle;
                 default:
                     break;
             }

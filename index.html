@@ -17,7 +17,7 @@
     <script id="notes-list-template" type="text/x-handlebars-template">
         <div id="top-buttons">
             <button type="button" class="action-button" data-command="create">
-                Add new Note...
+                Add new Note
             </button>
         </div>
         <ul class="notes-list">
@@ -29,8 +29,8 @@
                         title="Toggle finished" {{#if finished}}checked="checked"{{/if}}>
                         Is Done
                     </label>
-                    <button type="button" class="action-button" data-command="edit" data-note-id="{{id}}">Edit...</button>
-                    <button type="button" class="action-button" data-command="delete" data-note-id="{{id}}">Delete...</button>
+                    <button type="button" class="action-button" data-command="edit" data-note-id="{{id}}">Edit</button>
+                    <button type="button" class="action-button" data-command="delete" data-note-id="{{id}}">Delete</button>
                 </div>
                 <div class="note-content">
                     <div class="note-title-row">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div>
-                        {{description}}
+                        {{nl2br description}}
                     </div>
                     <div class="created-date">
                         Created {{dateFormat createdDate}}
@@ -63,53 +63,53 @@
     </script>
 
     <script id="notes-form-template" type="text/x-handlebars-template">
-            <h1>
-                {{#if id}}
-                    <h1>Edit note</h1>
-                {{else}}
-                    <h1>Add new note</h1>
-                {{/if}}
-            </div>
-            <div>
-                <div class="form-row">
-                    <div class="form-label">Title</div>
-                    <div class="form-value">
-                        <input type="text" name="title" value="{{title}}" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label">Details</div>
-                    <div class="form-value">
-                        <textarea name="description">{{description}}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label">Prio</div>
-                    <div class="form-value">
-                        <label>
-                            <input type="radio" name="priority" value="1" {{checkedwhen priority '1'}} required> 1
-                        </label>
-                        <label>
-                            <input type="radio" name="priority" value="2" {{checkedwhen priority '2'}} required> 2
-                        </label>
-                        <label>
-                            <input type="radio" name="priority" value="3" {{checkedwhen priority '3'}} required> 3
-                        </label>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label">Due date</div>
-                    <div class="form-value">
-                        <input type="date" name="dueDate" value="{{dueDate}}">
-                    </div>
+        <h1>
+            {{#if id}}
+                <h1>Edit note</h1>
+            {{else}}
+                <h1>Add new note</h1>
+            {{/if}}
+        </div>
+        <div>
+            <div class="form-row">
+                <div class="form-label">Title</div>
+                <div class="form-value">
+                    <input type="text" name="title" value="{{title}}" required>
                 </div>
             </div>
-            <div class="form-button-row">
-                <input type="hidden" name="id" value="{{id}}" />
+            <div class="form-row">
+                <div class="form-label">Details</div>
+                <div class="form-value">
+                    <textarea name="description">{{description}}</textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-label">Prio</div>
+                <div class="form-value">
+                    <label>
+                        <input type="radio" name="priority" value="1" {{checkedwhen priority '1'}} required> 1
+                    </label>
+                    <label>
+                        <input type="radio" name="priority" value="2" {{checkedwhen priority '2'}} required> 2
+                    </label>
+                    <label>
+                        <input type="radio" name="priority" value="3" {{checkedwhen priority '3'}} required> 3
+                    </label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-label">Due date</div>
+                <div class="form-value">
+                    <input type="date" name="dueDate" value="{{dueDate}}">
+                </div>
+            </div>
+        </div>
+        <div class="form-button-row">
+            <input type="hidden" name="id" value="{{id}}" />
 
-                <button type="submit" class="action-button" data-command="save">Save</button>
-                <button type="button" class="" data-command="cancel">Cancel</button>
-            </div>
+            <button type="submit" class="action-button" data-command="save">Save</button>
+            <button type="button" class="" data-command="cancel">Cancel</button>
+        </div>
     </script>
 
 </head>
@@ -131,22 +131,19 @@
         <div class="list-controls">
             <div class="list-control" id="sort-buttons">
                 <label class="toggle-button">
-                        <input type="radio" data-sort-order="priority" name="sort-order"> Sort by Priority
+                    <input type="radio" data-sort-order="priority" name="sort-order"> By Priority
                 </label>
                 <label class="toggle-button">
-                        <input type="radio" data-sort-order="dueDate" name="sort-order"> Due Date
+                    <input type="radio" data-sort-order="dueDate" name="sort-order"> Due Date
                 </label>
                 <label class="toggle-button">
-                    <input type="radio" data-sort-order="title" name="sort-order"> Title
-                </label>
-                <label class="toggle-button">
-                        <input type="radio" data-sort-order="createdDate" name="sort-order"> Created
+                    <input type="radio" data-sort-order="createdDate" name="sort-order"> Created
                 </label>
             </div>
 
             <div class="list-control" id="filter-buttons">
                 <label class="toggle-button">
-                        <input type="checkbox" data-filter="showFinished"> Show finished
+                    <input type="checkbox" data-filter="showFinished"> Show finished
                 </label>
             </div>
         </div>

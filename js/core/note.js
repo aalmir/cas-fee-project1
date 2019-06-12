@@ -15,12 +15,12 @@ export class Note {
         return -(s2.priority - s1.priority);
     }
     static compareByDueDate (s1, s2) {
+        if(s1.dueDate === s2.dueDate) return 0;
+        if(s1.dueDate === null) return 1;
+        if(s2.dueDate === null) return -1;
         return -(s2.dueDate - s1.dueDate);
     }
     static compareByCreatedDate (s1, s2) {
         return (s2.createdDate - s1.createdDate);
-    }
-    static compareByTitle (s1, s2) {
-        return s1.title.localeCompare(s2.title);
     }
 }
