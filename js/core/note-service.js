@@ -74,7 +74,7 @@ export class NoteService {
     }
 
     load() {
-        this.notes = this.storage.getAll().map(NoteService.convertFromJson);
+        this.notes = this.storage.getNotes().map(NoteService.convertFromJson);
     }
 
     static convertFromJson (noteDto) {
@@ -89,7 +89,7 @@ export class NoteService {
     }
 
     save() {
-        this.storage.saveAll(this.notes);
+        this.storage.saveNotes(this.notes);
     }
 
 }

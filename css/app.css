@@ -151,6 +151,10 @@ ul.notes-list > li.done-true {
     background-color: honeydew;
 }
 
+ul.notes-list > li.empty-list-placeholder {
+    color: gray;
+}
+
 .note-content {
     padding: 0.3em 0.8em;
 }

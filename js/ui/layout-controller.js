@@ -1,12 +1,14 @@
 export class LayoutController {
-    constructor() {
-         // DOM Elements
-         this.themeSelect = document.querySelector("#theme-control select");
- 
-        // View State
-        this.theme = "bright-theme";
+    constructor(preferencesService) {
+        this.preferencesService = preferencesService;
+        this.theme = this.preferencesService.getTheme() || "bright-theme";
 
-        // Init
+        this.themeSelect = document.querySelector("#theme-control select");
+        this.themeSelect.querySelector(`[value="${this.theme}"]`).selected = true;
+
+        const body = document.querySelector("body");
+        body.classList.add(this.theme);
+
         this.initEventHandlers();
     }
 
@@ -18,6 +20,7 @@ export class LayoutController {
             body.classList.add(newTheme);
             body.classList.remove(this.theme);
             this.theme = newTheme;
+            this.preferencesService.setTheme(newTheme);
         }
     }
 

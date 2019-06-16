@@ -44,8 +44,8 @@
         </div>
         <ul class="notes-list">
             {{#unless notes.length}}
-                <li>
-                    Use the Add-Button to start...
+                <li class="empty-list-placeholder">
+                    No notes to show
                 </li>
             {{/unless}}
             {{#each notes}}
@@ -141,7 +141,7 @@
 
 </head>
 
-<body class="bright-theme">
+<body>
 
     <header id="layout-header">
         <h1>Blue Notes App</h1>

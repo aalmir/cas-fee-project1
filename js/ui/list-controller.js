@@ -4,25 +4,28 @@ import { ListViewModel } from "./list-view-model.js";
 
 export class ListController {
 
-    constructor(noteService, router) {
+    constructor(noteService, router, preferencesService) {
         // Static config
-        const defaultSortorder = "priority";
-        const defaultShowDone = false;
-        const showDebug = true;
+        const SHOW_DEBUG = true;
 
         // Service
         this.noteService = noteService;
         this.router = router;
-        router.bindListController(this); 
-        
+        this.router.bindListController(this); 
+        this.preferencesService = preferencesService;
+ 
+        // State
+        this.viewState = new ListViewState(
+            this.preferencesService.getListSortOrder() || "priority", 
+            this.preferencesService.getListShowDone(), 
+            SHOW_DEBUG
+        );
+       
         // Handlebars
         this.listTemplate = HandlebarsHelpers.compileNode("notes-list-template");
 
         // DOM Elements
         this.listContainer = document.getElementById("list-container");
-
-        // View State
-        this.viewState = new ListViewState(defaultSortorder, defaultShowDone, showDebug);
 
         // Init
         this.initEventHandlers();
@@ -34,23 +37,33 @@ export class ListController {
         if (command) {
             switch (command) {
                 case 'toggle-sort':
-                    this.viewState.sortOrder = event.target.dataset.sortOrder;
-                    this.renderList();
+                    const newSortOrder = event.target.dataset.sortOrder;
+                    if(newSortOrder !== this.viewState.sortOrder) {
+                        this.viewState.sortOrder = newSortOrder;
+                        this.preferencesService.setListSortOrder(newSortOrder);
+                        this.renderList();
+                    }
                     break;
 
-                    case 'toggle-show-done':
-                    this.viewState.showDone = event.target.checked;
-                    this.renderList();
+                case 'toggle-show-done':
+                    const newShowDone = event.target.checked;
+                    if(newShowDone !== this.viewState.showDone) {
+                        this.viewState.showDone = newShowDone;
+                        this.preferencesService.setListShowDone(newShowDone);
+                        this.renderList();
+                    }
                     break;
 
                 case 'toggle-done':
                     this.noteService.toggleDone(noteId)
                     this.renderList();
                     break;
+
                 case 'edit':
                     this.hideList();
                     this.router.showEditForm(noteId);
                     break;
+
                 case 'delete':
                     if (confirm("Do you really want to delete this note?")) {
                         this.noteService.deleteNote(noteId)
@@ -67,14 +80,17 @@ export class ListController {
                     this.noteService.seed();
                     this.renderList();
                     break;
+
                 case 'clear':
                     this.noteService.clear();
                     this.renderList();
                     break;
+
                 case 'load':
                     this.noteService.load();
                     this.renderList();
                     break;
+
                 case 'home':
                     window.location.href = './';
                     break;
