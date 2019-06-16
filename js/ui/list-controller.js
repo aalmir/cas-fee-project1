@@ -23,7 +23,7 @@ export class ListController {
         this.listContainer = document.getElementById("list-container");
 
         // View State
-        this.theme = "white-theme";
+        this.theme = "bright-theme";
         this.viewState = new ListViewState(defaultSortorder, defaultShowDone, showDebug);
 
         // Init

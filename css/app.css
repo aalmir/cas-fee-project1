@@ -122,7 +122,7 @@ header.layout-header select {
 
 .list-head-item {
     white-space: nowrap;
-    padding: 0.5em 0.1em 0.1em 0.1em;
+    padding: 0.5em 0.1em 0.3em 0.1em;
 }
 .list-head-item.list-action-buttons {
     padding-left: 0.1em;
@@ -215,27 +215,40 @@ ul.notes-list > li.done-true {
 
 /* Themes */
 
-body.black-theme {
+body.dark-theme {
     background-color: black; 
     color: white;
 }
 
-body.black-theme select, 
-body.black-theme input,
-body.black-theme textarea {
-    background-color: dimgray;
-    border-color: white;
+body.dark-theme select, 
+body.dark-theme input,
+body.dark-theme textarea {
+    background-color: #333333;
+    border-color: gray;
     color: white;
 }
 
-body.black-theme ul.notes-list > li {
+body.dark-theme .button:hover {
+    color: peachpuff;
+}
+
+body.dark-theme .filter-button {
+    color: gray;
+}
+
+body.dark-theme ul.notes-list > li {
     background-color: black;
 }
-body.black-theme ul.notes-list > li.done-true {
-    background-color: darkslategray;
+body.dark-theme ul.notes-list > li.done-true {
+    color: rgb(117, 112, 113);
+}
+
+.form-row, .form-row:last-child {
+    border-color: gainsboro;
 }
 
 /* Small screens */
+
 @media screen and (max-width: 400px) {
     .list-head-item {
         white-space: normal;
