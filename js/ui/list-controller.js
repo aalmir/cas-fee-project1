@@ -16,7 +16,7 @@ export class ListController {
  
         // State
         this.viewState = new ListViewState(
-            this.preferencesService.getListSortOrder() || "priority", 
+            this.preferencesService.getListSortOrder() || noteService.SORT_ORDER.priority, 
             this.preferencesService.getListShowDone(), 
             SHOW_DEBUG
         );
