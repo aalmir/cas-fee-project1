@@ -31,7 +31,6 @@ export class PreferencesService {
     }
 
     setListShowDone(showDone) {
-        console.log(showDone)
         this.preferences.listShowDone = showDone;
         this.save();
     }
