@@ -8,7 +8,7 @@ export class Note {
         this.priority = 1;
         this.dueDate = null;
         this.createdDate = new Date();
-        this.finished = false; 
+        this.done = false; 
     }
 
     static compareByPriority (s1, s2) {

@@ -1,3 +1,5 @@
+/* Resets */
+
 html {
     box-sizing: border-box;
   }
@@ -5,10 +7,12 @@ html {
     box-sizing: inherit;
   }
   
-  body {
-    background-color: #f5deb3; 
-    color: #55433B;
-    font-family: Arial, Helvetica, sans-serif;
+/* Element styling */
+
+body {
+    background-color: whitesmoke; 
+    color: black;
+    font-family: Helvetica, Arial, sans-serif;
     padding: 0;
     margin: 0;
     font-size: 18px;
@@ -19,36 +23,63 @@ select, input, textarea {
     font-family: inherit;
     font-size: inherit;
     color: inherit;
-    border: 1px solid #55433B;
+    border: 1px solid dimgray;
 }
 
 input[type=radio], input[type=checkbox] {
     margin: -.05em;
 }
 
-button, label.toggle-button {
-    background-color: inherit;
-    border: none;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: inherit;
-    color: #C0564B;
-    padding: 0;
-    margin-right: 0.7em;
-    font-size: 0.8em;
-    text-transform: uppercase;
-    cursor: pointer;
+h1 {
+    margin: 0 0 0.3em 0;
+    font-size: 2em;
 }
 
+/* Buttons */
+
+.button-panel {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.button {
+    background-color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    text-transform: inherit;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.button:hover {
+    color:darkblue;
+}
+
+.button + .button {
+    margin-left: 0.5em;
+}
+
+/* button modifiers: */
 .action-button {
+    color: cornflowerblue;
     font-weight: bold;
 }
-
+.navigation-button {
+    color: cornflowerblue;
+}
+.filter-button {
+    color: darkslateblue;
+}
+/* Layout */
 
 header.layout-header {
-    background-color: #FF8B5C;
-    color: white;
+    background-color: darkblue;
+    color:whitesmoke;
     display: flex;
-    padding: 1vw 3vw;
+    padding: 10px 20px;
 }
 
 header.layout-header > h1 {
@@ -64,21 +95,9 @@ header.layout-header select {
 }
 
 #content {
-    padding: 2vw 0;
-    max-width: 39em;
+    margin: 10px 20px;
+    max-width: 700px;
 }
-
-/* List Controls */
-
-.list-controls {
-    display: flex;
-}
-
-.list-control {
-    flex-grow: 1;
-    padding: 0.3em;
-}
-
 
 /* List */
 
@@ -86,26 +105,50 @@ header.layout-header select {
     margin-top: 1em;
 }
 
+.debug-buttons {
+    margin-top: 4em;
+    padding: 4px;
+    font-size: 0.7em;
+    border: 1px solid black;
+}
+
+.list-head-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap-reverse;
+}
+
+.list-head-item {
+    white-space: nowrap;
+    padding: 0.5em 0.1em 0.1em 0.1em;
+}
+.list-head-item.list-action-buttons {
+    padding-left: 0.1em;
+}
+
+
 ul.notes-list  {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 ul.notes-list > li {
-    border-top: 1px solid white;
-    padding: 0.1em 0.5em;
+    border-top: 1px solid silver;
+    padding: 1% 2%;
+    background-color: white;
 }
 
 ul.notes-list > li:last-child {
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid silver;
 }
 
-ul.notes-list > li.finished-true {
-    background-color: #FFC2B1;
+ul.notes-list > li.done-true {
+    background-color: honeydew;
 }
 
 .note-content {
-    padding: 0.3em 1em;
+    padding: 0.3em 0.8em;
 }
 
 .note-title-row {
@@ -128,7 +171,6 @@ ul.notes-list > li.finished-true {
     font-size: 0.7em;
     padding-top: 0.7em;
 }
-
 
 
 /* Form */
@@ -168,43 +210,38 @@ ul.notes-list > li.finished-true {
 
 .form-button-row {
     padding: 0.4em;
+    font-size: 1em;
 }
+
 
 /* Misc */
 
-#top-buttons {
-    padding-left: 0.5em;
-}
 
-#debug-buttons {
-    margin-top: 3em;
-    padding: 1.5em;
-}
-
-/* Theme */
+/* Themes */
 
 body.black-theme {
-    background-color: #55433B; 
+    background-color: black; 
     color: white;
 }
 
 body.black-theme select, 
 body.black-theme input,
 body.black-theme textarea {
-    background-color: #A26952;
-    border-color: #55433B;
+    background-color: dimgray;
+    border-color: white;
     color: white;
 }
 
-body.black-theme button, 
-body.black-theme label.toggle-button {
-    color: #FF8B5C;
-}
-
 body.black-theme ul.notes-list > li {
+    background-color: black;
+}
+body.black-theme ul.notes-list > li.done-true {
+    background-color: darkslategray;
 }
 
-body.black-theme ul.notes-list > li.finished-true {
-    background-color: #402E32;
+/* Small screens */
+@media screen and (max-width: 400px) {
+    .list-head-item {
+        white-space: normal;
+    }
 }
-

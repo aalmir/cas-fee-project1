@@ -15,22 +15,49 @@
     <script src="js/bootstrapper.js" type="module" defer></script>
 
     <script id="notes-list-template" type="text/x-handlebars-template">
-        <div id="top-buttons">
-            <button type="button" class="action-button" data-command="create">
-                Add new Note
-            </button>
+        <h1>
+            Notes
+        </h1>
+        <div class="button-panel list-head-row">
+            <div class="list-head-item list-action-buttons">
+                <button type="button" class="button action-button" data-command="create">
+                    Add note
+                </button>
+            </div>
+            <div class="list-head-item" id="sort-buttons">
+                <label class="button filter-button">
+                    <input type="radio" data-command="toggle-sort" data-sort-order="priority" name="sort-order" {{checkedwhen viewState.sortOrder 'priority'}}> Sort by Priority
+                </label>
+                <label class="button filter-button">
+                    <input type="radio" data-command="toggle-sort" data-sort-order="due" name="sort-order"{{checkedwhen viewState.sortOrder 'due'}}> Due Date
+                </label>
+                <label class="button filter-button">
+                    <input type="radio" data-command="toggle-sort" data-sort-order="created" name="sort-order"{{checkedwhen viewState.sortOrder 'created'}}> Created
+                </label>
+            </div>
+
+            <div class="list-head-item" id="filter-buttons">
+                <label class="button filter-button">
+                    <input type="checkbox" data-command="toggle-show-done" {{checkedwhen viewState.showDone true}}> Show Done Items
+                </label>
+            </div>
         </div>
         <ul class="notes-list">
-            {{#each this}}
-            <li class="finished-{{finished}}">
-                <div class="note-button-row">
-                    <label class="toggle-button action-button">
-                        <input type="checkbox" data-command="toggle-finished" data-note-id="{{id}}" 
-                        title="Toggle finished" {{#if finished}}checked="checked"{{/if}}>
+            {{#unless notes.length}}
+                <li>
+                    Use the Add-Button to start...
+                </li>
+            {{/unless}}
+            {{#each notes}}
+            <li class="done-{{done}}">
+                <div class="button-panel note-button-row">
+                    <label class="button action-button">
+                        <input type="checkbox" data-command="toggle-done" data-note-id="{{id}}" 
+                        title="Toggle done" {{checkedwhen done true}}>
                         Is Done
                     </label>
-                    <button type="button" class="action-button" data-command="edit" data-note-id="{{id}}">Edit</button>
-                    <button type="button" class="action-button" data-command="delete" data-note-id="{{id}}">Delete</button>
+                    <button type="button" class="button action-button" data-command="edit" data-note-id="{{id}}">Edit</button>
+                    <button type="button" class="button action-button" data-command="delete" data-note-id="{{id}}">Delete</button>
                 </div>
                 <div class="note-content">
                     <div class="note-title-row">
@@ -51,15 +78,17 @@
             </li>
             {{/each}}
         </ul>
-        <div id="debug-buttons">
-            DEBUG: 
-            <button type="button" class="action-button" data-command="seed">Seed</button>
-            <button type="button" class="action-button" data-command="clear">Clear</button>
-            <button type="button" class="" data-command="load">Load</button>
-            <button type="button" class="" data-command="home">Home-URL</button>
+        {{#if viewState.showDebug}}
+        <div class="button-panel debug-buttons">
+            Debug: 
+            <button type="button" class="button action-button" data-command="seed">Seed</button>
+            <button type="button" class="button action-button" data-command="clear">Clear</button>
+            <button type="button" class="button navigation-button" data-command="load">Load</button>
+            <button type="button" class="button navigation-button" data-command="home">Home-URL</button>
             Length: 
-            {{length}}
+            {{notes.length}}
         </div>
+        {{/if}}
     </script>
 
     <script id="notes-form-template" type="text/x-handlebars-template">
@@ -104,11 +133,11 @@
                 </div>
             </div>
         </div>
-        <div class="form-button-row">
+        <div class="button-panel form-button-row">
             <input type="hidden" name="id" value="{{id}}" />
 
-            <button type="submit" class="action-button" data-command="save">Save</button>
-            <button type="button" class="" data-command="cancel">Cancel</button>
+            <button type="submit" class="button action-button" data-command="save">Save</button>
+            <button type="button" class="button navigation-button" data-command="cancel">Cancel</button>
         </div>
     </script>
 
@@ -117,7 +146,7 @@
 <body class="white-theme">
 
     <header class="layout-header">
-        <h1>Vanilla Notes</h1>
+        <h1>Blue Notes</h1>
         <div id="theme-control">
             Theme:
             <select>
@@ -128,29 +157,11 @@
     </header>
 
     <div id="content">
-        <div class="list-controls">
-            <div class="list-control" id="sort-buttons">
-                <label class="toggle-button">
-                    <input type="radio" data-sort-order="priority" name="sort-order"> By Priority
-                </label>
-                <label class="toggle-button">
-                    <input type="radio" data-sort-order="dueDate" name="sort-order"> Due Date
-                </label>
-                <label class="toggle-button">
-                    <input type="radio" data-sort-order="createdDate" name="sort-order"> Created
-                </label>
-            </div>
-
-            <div class="list-control" id="filter-buttons">
-                <label class="toggle-button">
-                    <input type="checkbox" data-filter="showFinished"> Show finished
-                </label>
-            </div>
-        </div>
 
         <div id="list-container"></div>
 
         <form id="notes-form"></form>
+
     </div>
 
 </body>

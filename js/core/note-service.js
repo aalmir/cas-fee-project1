@@ -10,18 +10,18 @@ export class NoteService {
         this.load();
     }
 
-    getNotes(sortOrder, showFinished) { 
-        var comparer = (function () {
+    getNotes(sortOrder, showDone) { 
+        const comparer = (function () {
             switch (sortOrder) {
                 case "priority": return Note.compareByPriority;
-                case "dueDate": return Note.compareByDueDate;
-                case "createdDate": return Note.compareByCreatedDate;
+                case "due": return Note.compareByDueDate;
+                case "created": return Note.compareByCreatedDate;
                 default:
                     break;
             }
         })();
         return [...this.notes]
-            .filter(x => showFinished || !x.finished)
+            .filter(x => showDone || !x.done)
             .sort(comparer);
     }
 
@@ -31,10 +31,10 @@ export class NoteService {
 
     addNote(updateFunc) {
         const maxId = this.notes.length == 0 ? 0 : Math.max(...this.notes.map(x => x.id));
-        var note = {
+        const  note = {
             "id": maxId + 1,
             "createdDate": new Date(),
-            "finished": false
+            "done": false
         };
         updateFunc(note);
 
@@ -49,12 +49,12 @@ export class NoteService {
         this.save();
     }
 
-    toggleFinished(id) {
+    toggleDone(id) {
         const note = this.findNote(id);
         if (!note) {
             return false;
         }
-        note.finished = !note.finished;
+        note.done = !note.done;
         this.save();
     }
     
@@ -84,7 +84,7 @@ export class NoteService {
         note.priority = noteDto.priority;
         note.dueDate = noteDto.dueDate ? new Date(noteDto.dueDate) : null;
         note.createdDate = new Date(noteDto.createdDate);
-        note.finished = noteDto.finished;
+        note.done = noteDto.done;
         return note;
     }
 

@@ -49,7 +49,7 @@ export class FormController {
     }
 
     static getFormModel(form) {
-        var formModel = {
+        const formModel = {
             title: form.querySelector("[name=\"title\"]").value,
             description: form.querySelector("[name=\"description\"]").value,
             priority: form.querySelector("[name=\"priority\"]:checked").value,

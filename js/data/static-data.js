@@ -8,7 +8,7 @@ export class StaticData {
                 "priority": 1,
                 "dueDate": new Date(2019, 7, 7),
                 "createdDate": new Date(2019, 5, 1),
-                "finished": false
+                "done": false
             },
             {
                 "id": 2,
@@ -17,16 +17,16 @@ export class StaticData {
                 "priority": 2,
                 "dueDate": null,
                 "createdDate": new Date(2019, 5, 2),
-                "finished": false
+                "done": false
             },
             {
                 "id": 3,
                 "title": "Salat",
                 "description": "",
                 "priority": 3,
-                "dueDate": null,
+                "dueDate": new Date(2019, 8, 2),
                 "createdDate": new Date(2019, 5, 2),
-                "finished": false
+                "done": false
             }
         ];
     }
