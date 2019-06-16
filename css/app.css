@@ -81,23 +81,25 @@ h1 {
 }
 /* Layout */
 
-header.layout-header {
-    background-color: darkblue;
+#layout-header {
+    background-color: cornflowerblue;
     color:whitesmoke;
     display: flex;
     padding: 10px 20px;
 }
 
-header.layout-header > h1 {
+#layout-header > h1 {
     flex: 1;
     font-size: 1em;
     margin: 0;
+    font-weight: normal;
     text-transform: uppercase
 }
 
-header.layout-header select {
+#layout-header select {
     background-color: inherit;
     color: inherit;
+    border-color: white;
 }
 
 #content {
@@ -137,7 +139,7 @@ ul.notes-list  {
 
 ul.notes-list > li {
     border-top: 1px solid silver;
-    padding: 1% 2%;
+    padding: 0.4em 0.2em;
     background-color: white;
 }
 
@@ -226,6 +228,18 @@ body.dark-theme textarea {
     background-color: #333333;
     border-color: gray;
     color: white;
+}
+
+body.dark-theme #layout-header {
+    background-color: black;
+    color: silver;
+    border-bottom: 1px solid gray;
+}
+
+body.dark-theme header.layout-header select {
+    background-color: inherit;
+    color: inherit;
+    border-color: white;
 }
 
 body.dark-theme .button:hover {
