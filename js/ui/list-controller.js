@@ -19,26 +19,13 @@ export class ListController {
         this.listTemplate = HandlebarsHelpers.compileNode("notes-list-template");
 
         // DOM Elements
-        this.themeSelect = document.querySelector("#theme-control select");
         this.listContainer = document.getElementById("list-container");
 
         // View State
-        this.theme = "bright-theme";
         this.viewState = new ListViewState(defaultSortorder, defaultShowDone, showDebug);
 
         // Init
         this.initEventHandlers();
-    }
-
-    themeChangeHandler(event) {
-        const selectEl = event.target;
-        const newTheme = selectEl.options[selectEl.selectedIndex].value;
-        if (newTheme !== this.theme) {
-            const body = document.querySelector('body');
-            body.classList.add(newTheme);
-            body.classList.remove(this.theme);
-            this.theme = newTheme;
-        }
     }
 
     listClickHandler(event) {
@@ -99,7 +86,6 @@ export class ListController {
         }
     }
 
-
     renderList() {
         const notes = this.noteService.getNotes(
             this.viewState.sortOrder, 
@@ -116,9 +102,6 @@ export class ListController {
     }
 
     initEventHandlers() {
-
-        this.themeSelect.addEventListener("change", this.themeChangeHandler.bind(this));
-
         this.listContainer.addEventListener("click", this.listClickHandler.bind(this));
     }
 

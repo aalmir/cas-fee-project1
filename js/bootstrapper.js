@@ -4,6 +4,7 @@ import { NoteService } from './core/note-service.js';
 import { ListController } from './ui/list-controller.js';
 import { Router } from "./ui/router.js";
 import { FormController } from "./ui/form-controller.js";
+import { LayoutController } from "./ui/layout-controller.js";
 //import { FormController } from './ui/form-controller.js';
 
 class Bootstrapper {
@@ -14,8 +15,10 @@ class Bootstrapper {
         const noteService = new NoteService(storage);
 
         const router = new Router();
-        new ListController(noteService, router), 
-        new FormController(noteService, router) 
+
+        new LayoutController();
+        new ListController(noteService, router);
+        new FormController(noteService, router);
         
         router.showList();
     }
