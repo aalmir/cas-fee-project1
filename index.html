@@ -92,16 +92,14 @@
     </script>
 
     <script id="notes-form-template" type="text/x-handlebars-template">
-        <h1>
-            {{#if id}}
-                <h1>Edit note</h1>
-            {{else}}
-                <h1>Add new note</h1>
-            {{/if}}
-        </div>
+        {{#if id}}
+            <h1>Edit note</h1>
+        {{else}}
+            <h1>Add new note</h1>
+        {{/if}}
         <div>
             <div class="form-row">
-                <div class="form-label">Title</div>
+                <div class="form-label">Title *</div>
                 <div class="form-value">
                     <input type="text" name="title" value="{{title}}" required>
                 </div>
@@ -109,7 +107,7 @@
             <div class="form-row">
                 <div class="form-label">Details</div>
                 <div class="form-value">
-                    <textarea name="description">{{description}}</textarea>
+                    <textarea name="description" rows="5">{{description}}</textarea>
                 </div>
             </div>
             <div class="form-row">
