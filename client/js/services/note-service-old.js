@@ -1,32 +1,17 @@
 import { StaticData } from '../data/static-data.js';
 import { Note } from './note.js';
 
-export class NoteService {
+export class NoteServiceOld {
 
     constructor(storage) {
         this.storage = storage;
         this.notes = [];
 
-        this.SORT_ORDER = {
-            priority: "priority",
-            due: "due",
-            created: "created"
-        }
-
         this.load();
     }
 
-    getComparer(sortOrder) {
-        switch (sortOrder) {
-            case this.SORT_ORDER.priority: return Note.compareByPriority;
-            case this.SORT_ORDER.due: return Note.compareByDueDate;
-            case this.SORT_ORDER.created: return Note.compareByCreatedDate;
-            default: return Note.compareByPriority;     
-        }
-    }
-
     getNotes(sortOrder, showDone) {
-        const comparer = this.getComparer(sortOrder)
+        const comparer = Note.getComparer(sortOrder)
         return [...this.notes]
             .filter(x => showDone || !x.done)
             .sort(comparer);
@@ -76,23 +61,12 @@ export class NoteService {
     }
 
     seed() {
-        this.notes = StaticData.getSampleData().map(NoteService.convertFromJson);
+        this.notes = StaticData.getSampleData().map(Note.convertFromJson);
         this.save();
     }
 
     load() {
-        this.notes = this.storage.getNotes().map(NoteService.convertFromJson);
-    }
-
-    static convertFromJson(noteDto) {
-        const note = new Note(noteDto.id);
-        note.title = noteDto.title;
-        note.description = noteDto.description;
-        note.priority = noteDto.priority;
-        note.dueDate = noteDto.dueDate ? new Date(noteDto.dueDate) : null;
-        note.createdDate = new Date(noteDto.createdDate);
-        note.done = noteDto.done;
-        return note;
+        this.notes = this.storage.getNotes().map(Note.convertFromJson);
     }
 
     save() {

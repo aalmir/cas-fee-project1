@@ -1,9 +1,9 @@
 import { HandlebarsHelpers } from "./ui/handlebars-helpers.js";
 
-import { LocalStorage } from './data/local-storage.js';
+import { LocalStorage } from './services/local-storage.js';
 
-import { NoteService } from './core/note-service.js';
-import { PreferencesService } from './core/preferences-service.js';
+import { NoteServiceOld } from './services/note-service-old.js';
+import { PreferencesService } from './services/preferences-service.js';
 
 import { Router } from "./ui/router.js";
 
@@ -16,7 +16,7 @@ class Bootstrapper {
         HandlebarsHelpers.registerHelpers();
 
         const storage = new LocalStorage();
-        const noteService = new NoteService(storage);
+        const noteService = new NoteServiceOld(storage); // <--
         const preferencesService = new PreferencesService(storage);
 
         const router = new Router();
