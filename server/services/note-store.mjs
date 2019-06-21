@@ -17,7 +17,7 @@ export class Note {
 export class NoteStore {
     constructor(db) {
         this.db = db || new Datastore({
-            filename: './data/notes.db',
+            filename: './server/data/notes.db',
             autoload: true
         });
     }
