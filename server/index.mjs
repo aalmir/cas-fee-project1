@@ -31,35 +31,6 @@ app.use(function (err, req, res, next) {
 const hostname = '127.0.0.1';
 const port = 3001;
 app.listen(port, hostname, () => {
+    // eslint-disable-next-line no-console
     console.log(`Server running at http://${hostname}:${port}/`);    
 });
-
-/*
-// Some ad-hoc tests
-
-import { notesStore } from './services/notes-store';
-
-async function tests() {
-    console.log('test');
-
-    console.log("getAll", await notesStore.getAll())
-
-    console.log("create", await notesStore.create({ id: 1, title: 'Vanille'}))
-    console.log("getAll", await notesStore.getAll())
-
-    console.log("update", await notesStore.update({ id: 1, title: "Schoko" }))
-    console.log("getAll", await notesStore.getAll())
-
-    console.log("get 1", await notesStore.get(1))
-
-    console.log("delete", await notesStore.delete(1));
-    console.log("getAll", await notesStore.getAll())
-
-    console.log("deleteAll", await notesStore.deleteAll());
-    console.log("getAll", await notesStore.getAll())
-
-    console.log("all tests done")
-}
-
-tests();
-*/

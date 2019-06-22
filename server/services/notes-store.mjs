@@ -32,15 +32,15 @@ export class NotesStore {
         return await this.db.findOne({ id: id });
     }
 
-    async create(noteDto) {
+    async put(noteDto) {
         const entry = new NoteEntry(noteDto);
-        const dbResult = await this.db.insert(entry);
-        return dbResult;
-    }
-
-    async update(noteDto) {
-        const entry = new NoteEntry(noteDto);
-        return await this.db.update({ id: entry.id }, { $set: entry });
+        var existing = await this.get(entry.id);
+        if(existing === null) {
+            return await this.db.insert(entry);
+        }
+        else {
+            return await this.db.update({ id: entry.id }, { $set: entry });
+        }
     }
 
     async delete(id) {

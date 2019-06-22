@@ -12,11 +12,11 @@ export class NotesController {
     }
 
     async createNote(req, res) {
-        res.json(await notesStore.create(req.body));
+        res.json(await notesStore.put(req.body));
     }
 
     async updateNote(req, res) {
-        res.json(await notesStore.update(req.body));
+        res.json(await notesStore.put(req.body));
     }
 
     async deleteNote(req, res) {

@@ -19,6 +19,11 @@ npm run dev
 ```
 (using nodemon)
 
+To run some tests:
+```bash
+npm test
+```
+
 ## Funktionsumfang
 
 Vorgabe der Schule:
