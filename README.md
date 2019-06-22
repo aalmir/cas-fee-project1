@@ -13,6 +13,11 @@ npm install
 ```bash
 npm start
 ```
+or
+```bash
+npm run dev
+```
+(using nodemon)
 
 ## Funktionsumfang
 
