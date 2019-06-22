@@ -13,7 +13,7 @@ class NoteEntry {
         this.dueDate = json.dueDate ? new Date(json.dueDate) : null;
         this.createdDate = json.createdDate ? new Date(json.createdDate) : new Date();
         this.done = json.done || false;
-   }
+    }
 }
 
 export class NotesStore {
@@ -35,7 +35,7 @@ export class NotesStore {
     async put(noteDto) {
         const entry = new NoteEntry(noteDto);
         var existing = await this.get(entry.id);
-        if(existing === null) {
+        if (existing === null) {
             return await this.db.insert(entry);
         }
         else {
@@ -48,9 +48,9 @@ export class NotesStore {
     }
 
     async deleteAll() {
-        return await this.db.remove({ }, { multi: true });
+        return await this.db.remove({}, { multi: true });
     }
-    
+
 }
 
 export const notesStore = new NotesStore();

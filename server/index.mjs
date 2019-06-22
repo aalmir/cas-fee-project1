@@ -18,15 +18,6 @@ app.use(express.static(path.resolve('client')));
 // Note-Services "/notes"
 app.use("/notes", notesRoutes);
 
-// Error handler
-app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.json({
-        message: err.message,
-        error: err
-    });
-});
-
 // Server
 const hostname = '127.0.0.1';
 const port = 3001;
