@@ -3,8 +3,8 @@ import { FormModel } from "./form-model.js";
 
 export class FormController {
 
-    constructor(noteService, router) {
-        this.noteService = noteService;
+    constructor(notesService, router) {
+        this.notesService = notesService;
         this.router = router;
         router.bindFormController(this);
 
@@ -19,7 +19,7 @@ export class FormController {
     }
 
     async renderEditForm(noteId) {
-        const note = await this.noteService.getNote(noteId);
+        const note = await this.notesService.getNote(noteId);
         const formModel = new FormModel(note.id.toString());
         formModel.title = note.title;
         formModel.description = note.description;
@@ -76,11 +76,11 @@ export class FormController {
             note.dueDate = formModel.dueDate ? new Date(formModel.dueDate) : null;
         }
         if (formModel.id === "") {
-            await this.noteService.addNote(updateFunc);
+            await this.notesService.addNote(updateFunc);
         }
         else {
             const noteId = parseInt(formModel.id);
-            await this.noteService.updateNote(noteId, updateFunc);
+            await this.notesService.updateNote(noteId, updateFunc);
         }
         
         await this.hideForm()

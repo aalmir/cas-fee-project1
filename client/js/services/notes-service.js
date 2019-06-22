@@ -1,7 +1,7 @@
 import { StaticData } from '../data/static-data.js';
 import { Note } from './note.js';
 
-export class NoteService {
+export class NotesService {
 
     constructor(notesStore) {
         this.notesStore = notesStore;

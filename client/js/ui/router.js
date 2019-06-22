@@ -1,5 +1,6 @@
 /*
- * Poor man's solution to the problem of passing control from one controller to another
+ * Poor man's solution to the problem how one controller
+ * can transfer control to the other.
  */
 export class Router {
     constructor() {

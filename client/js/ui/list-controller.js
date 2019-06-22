@@ -1,14 +1,14 @@
 import { HandlebarsHelpers } from "./handlebars-helpers.js";
 import { ListViewState } from "./list-view-state.js";
-import { ListViewModel } from "./list-view-model.js";
+import { ListModel } from "./list-model.js";
 import { Note } from "../services/note.js";
 
 export class ListController {
 
-    constructor(noteService, router, preferencesService, debugMode) {
+    constructor(notesService, router, preferencesService, debugMode) {
 
         // Service
-        this.noteService = noteService;
+        this.notesService = notesService;
         this.router = router;
         this.router.bindListController(this); 
         this.preferencesService = preferencesService;
@@ -54,7 +54,7 @@ export class ListController {
                     break;
 
                 case 'toggle-done':
-                    await this.noteService.toggleDone(noteId)
+                    await this.notesService.toggleDone(noteId)
                     await this.renderList();
                     break;
 
@@ -65,7 +65,7 @@ export class ListController {
 
                 case 'delete':
                     if (confirm("Do you really want to delete this note?")) {
-                        await this.noteService.deleteNote(noteId)
+                        await this.notesService.deleteNote(noteId)
                         await this.renderList();
                     }
                     break;
@@ -76,12 +76,12 @@ export class ListController {
                     break;
 
                 case 'fill-samples':
-                    await this.noteService.fillSampleData();
+                    await this.notesService.fillSampleData();
                     await this.renderList();
                     break;
 
                 case 'clear':
-                    await this.noteService.clear();
+                    await this.notesService.clear();
                     await this.renderList();
                     break;
 
@@ -93,12 +93,12 @@ export class ListController {
     }
 
     async renderList() {
-        const notes = await this.noteService.getNotesSorted(
+        const notes = await this.notesService.getNotesSorted(
             this.viewState.sortOrder, 
             this.viewState.showDone
         );
-        const listViewModel = new ListViewModel(notes, this.viewState);
-        this.listContainer.innerHTML = this.listTemplate(listViewModel);
+        const listModel = new ListModel(notes, this.viewState);
+        this.listContainer.innerHTML = this.listTemplate(listModel);
 
         this.listContainer.style.display = "block";
     }

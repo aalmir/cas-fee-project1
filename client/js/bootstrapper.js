@@ -6,7 +6,7 @@ import { HttpHelper } from "./utils/http-helper.js";
 import { RestNotesStore } from './storage/rest-notes-store.js';
 import { LocalNotesStore } from './storage/local-notes-store.js';
 
-import { NoteService } from './services/note-service.js';
+import { NotesService } from './services/notes-service.js';
 import { PreferencesService } from './services/preferences-service.js';
 
 import { Router } from "./ui/router.js";
@@ -32,13 +32,13 @@ class Bootstrapper {
         else {
             notesStore = new LocalNotesStore();
         }
-        const noteService = new NoteService(notesStore);
+        const notesService = new NotesService(notesStore);
 
         const router = new Router();
 
         new LayoutController(preferencesService);
-        new ListController(noteService, router, preferencesService, DEBUG_MODE);
-        new FormController(noteService, router);
+        new ListController(notesService, router, preferencesService, DEBUG_MODE);
+        new FormController(notesService, router);
 
         router.showList();
     }
