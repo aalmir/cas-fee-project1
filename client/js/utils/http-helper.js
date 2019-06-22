@@ -1,4 +1,4 @@
-export class HttpService {
+export class HttpHelper {
 
     async ajax(method, url, data, headers) {
         const fetchHeaders = new Headers(

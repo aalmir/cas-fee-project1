@@ -1,6 +1,7 @@
 import { HandlebarsHelpers } from "./handlebars-helpers.js";
 import { ListViewState } from "./list-view-state.js";
 import { ListViewModel } from "./list-view-model.js";
+import { Note } from "../services/note.js";
 
 export class ListController {
 
@@ -31,7 +32,7 @@ export class ListController {
         this.initEventHandlers();
     }
 
-    listClickHandler(event) {
+    async listClickHandler(event) {
         const noteId = event.target.dataset.noteId;
         const command = event.target.dataset.command;
         if (command) {
@@ -41,7 +42,7 @@ export class ListController {
                     if(newSortOrder !== this.viewState.sortOrder) {
                         this.viewState.sortOrder = newSortOrder;
                         this.preferencesService.setListSortOrder(newSortOrder);
-                        this.renderList();
+                        await this.renderList();
                     }
                     break;
 
@@ -50,13 +51,13 @@ export class ListController {
                     if(newShowDone !== this.viewState.showDone) {
                         this.viewState.showDone = newShowDone;
                         this.preferencesService.setListShowDone(newShowDone);
-                        this.renderList();
+                        await this.renderList();
                     }
                     break;
 
                 case 'toggle-done':
-                    this.noteService.toggleDone(noteId)
-                    this.renderList();
+                    await this.noteService.toggleDone(noteId)
+                    await this.renderList();
                     break;
 
                 case 'edit':
@@ -66,8 +67,8 @@ export class ListController {
 
                 case 'delete':
                     if (confirm("Do you really want to delete this note?")) {
-                        this.noteService.deleteNote(noteId)
-                        this.renderList();
+                        await this.noteService.deleteNote(noteId)
+                        await this.renderList();
                     }
                     break;
 
@@ -77,18 +78,18 @@ export class ListController {
                     break;
 
                 case 'seed':
-                    this.noteService.seed();
-                    this.renderList();
+                    await this.noteService.seed();
+                    await this.renderList();
                     break;
 
                 case 'clear':
-                    this.noteService.clear();
-                    this.renderList();
+                    await this.noteService.clear();
+                    await this.renderList();
                     break;
 
                 case 'load':
-                    this.noteService.load();
-                    this.renderList();
+                    await this.noteService.loadAll();
+                    await this.renderList();
                     break;
 
                 case 'home':
@@ -102,8 +103,8 @@ export class ListController {
         }
     }
 
-    renderList() {
-        const notes = this.noteService.getNotes(
+    async renderList() {
+        const notes = await this.noteService.getNotes(
             this.viewState.sortOrder, 
             this.viewState.showDone
         );
@@ -118,7 +119,9 @@ export class ListController {
     }
 
     initEventHandlers() {
-        this.listContainer.addEventListener("click", this.listClickHandler.bind(this));
+        this.listContainer.addEventListener("click", 
+            async event => this.listClickHandler(event)
+        );
     }
 
 }

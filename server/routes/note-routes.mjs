@@ -15,13 +15,13 @@ const router = express.Router();
 router.get("/", catchAsyncErrors((req, res, next) => 
         notesController.getNotes(req, res, next)));
 router.get("/:id/", catchAsyncErrors((req, res, next) => 
-        notesController.getNote.bind(notesController)));
+        notesController.getNote(req, res, next)));
 
 router.post("/", catchAsyncErrors((req, res, next) => 
-        notesController.createNote.bind(notesController)));
+        notesController.createNote(req, res, next)));
 router.patch("/:id/", catchAsyncErrors((req, res, next) => 
-        notesController.updateNote.bind(notesController)));
+        notesController.updateNote(req, res, next)));
 router.delete("/:id/", catchAsyncErrors((req, res, next) => 
-        notesController.deleteNote.bind(notesController)));
+        notesController.deleteNote(req, res, next)));
 
 export const noteRoutes = router;

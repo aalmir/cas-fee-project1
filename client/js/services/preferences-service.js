@@ -1,45 +1,45 @@
 import { Preferences } from "./preferences.js";
 
 export class PreferencesService {
-    constructor(storage) {
-        this.storage = storage;
-        this.preferences = null;
+    constructor(prefsStore) {
+        this.prefStore = prefsStore;
+        this.prefs = null;
 
         this.load();
     }
 
     getTheme() {
-        return this.preferences.theme;
+        return this.prefs.theme;
     }
 
     setTheme(theme) {
-        this.preferences.theme = theme;
+        this.prefs.theme = theme;
         this.save();
     }
 
     getListSortOrder() {
-        return this.preferences.listSortOrder;
+        return this.prefs.listSortOrder;
     }
 
     setListSortOrder(sortOrder) {
-        this.preferences.listSortOrder = sortOrder;
+        this.prefs.listSortOrder = sortOrder;
         this.save();
     }
 
     getListShowDone() {
-        return this.preferences.listShowDone;
+        return this.prefs.listShowDone;
     }
 
     setListShowDone(showDone) {
-        this.preferences.listShowDone = showDone;
+        this.prefs.listShowDone = showDone;
         this.save();
     }
     load() {
-        this.preferences = this.storage.getPreferences() || new Preferences();
+        this.prefs = this.prefStore.getPreferences() || new Preferences();
     }
 
     save() {
-        this.storage.savePreferences(this.preferences);
+        this.prefStore.savePreferences(this.prefs);
     }
 
 }

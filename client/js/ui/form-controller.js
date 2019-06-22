@@ -18,8 +18,8 @@ export class FormController {
         this.initEventHandlers();
     }
 
-    renderEditForm(noteId) {
-        const note = this.noteService.findNote(noteId);
+    async renderEditForm(noteId) {
+        const note = await this.noteService.findNote(noteId);
         const formModel = new FormModel(note.id.toString());
         formModel.title = note.title;
         formModel.description = note.description;

@@ -11,7 +11,11 @@ export class NotesController {
     };
 
     async createNote(req, res) {
-        res.json(await noteStore.add(req.body.name));
+        console.log('createNote');
+        const merde = req.body[0];
+        console.log(merde)
+        const result = await noteStore.add(merde);
+        res.json(result);
     };
 
     async updateNote(req, res) {

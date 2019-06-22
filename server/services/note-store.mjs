@@ -12,6 +12,17 @@ export class Note {
         this.createdDate = new Date();
         this.done = false;
     }
+
+    static convertFromJson(noteDto) {
+        const note = new Note(noteDto.id);
+        note.title = noteDto.title;
+        note.description = noteDto.description;
+        note.priority = noteDto.priority;
+        note.dueDate = noteDto.dueDate ? new Date(noteDto.dueDate) : null;
+        note.createdDate = new Date(noteDto.createdDate);
+        note.done = noteDto.done;
+        return note;
+    }
 }
 
 export class NoteStore {
@@ -26,9 +37,12 @@ export class NoteStore {
         return await this.db.cfind().exec();
     }
 
-    async add(pizzaName, orderedBy) {
-        let order = new Order(pizzaName, orderedBy);
-        return await this.db.insert(order);
+    async add(noteDto) {
+        //const note = Note.convertFromJson(noteDto);
+        console.log(noteDto);
+        const dbResult = await this.db.insert(noteDto);
+        console.log(dbResult);
+        return dbResult;
     }
 
     async update(id) {
