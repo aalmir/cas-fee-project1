@@ -1,31 +1,31 @@
-import { noteStore } from '../services/note-store'
+import { notesStore } from '../services/notes-store'
 
 export class NotesController {
 
     async getNotes(req, res) {
-        res.json((await noteStore.getAll() || []))
+        res.json((await notesStore.getAll() || []))
     };
 
     async getNote(req, res) {
         const id = parseInt(req.params.id);
-        res.json(await noteStore.get(id));
+        res.json(await notesStore.get(id));
     };
 
     async createNote(req, res) {
-        res.json(await noteStore.create(req.body));
+        res.json(await notesStore.create(req.body));
     };
 
     async updateNote(req, res) {
-        res.json(await noteStore.update(req.body));
+        res.json(await notesStore.update(req.body));
     };
 
     async deleteNote(req, res) {
         const id = parseInt(req.params.id);
-        res.json(await noteStore.delete(id));
+        res.json(await notesStore.delete(id));
     };
 
     async deleteAllNotes(req, res) {
-        res.json(await noteStore.deleteAll());
+        res.json(await notesStore.deleteAll());
     };
 }
 

@@ -1,7 +1,6 @@
 import express from 'express';
 import { notesController } from '../controllers/notes-controller';
 
-
 function catchAsyncErrors(fn) {
     return (req, res, next) => {
         const routePromise = fn(req, res, next);
@@ -26,4 +25,4 @@ router.delete("/:id/", catchAsyncErrors((req, res, next) =>
 router.delete("/", catchAsyncErrors((req, res, next) => 
         notesController.deleteAllNotes(req, res, next)));
 
-export const noteRoutes = router;
+export const notesRoutes = router;

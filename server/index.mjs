@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
-import { noteRoutes } from './routes/note-routes';
+import { notesRoutes } from './routes/notes-routes';
 
 // Express
 const app = express();
@@ -16,7 +16,7 @@ express.Router();
 app.use(express.static(path.resolve('client')));
 
 // Note-Services "/notes"
-app.use("/notes", noteRoutes);
+app.use("/notes", notesRoutes);
 
 // Error handler
 app.use(function (err, req, res, next) {
@@ -34,28 +34,32 @@ app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);    
 });
 
-import { noteStore } from './services/note-store';
+/*
+// Some ad-hoc tests
+
+import { notesStore } from './services/notes-store';
 
 async function tests() {
     console.log('test');
 
-    console.log("getAll", await noteStore.getAll())
+    console.log("getAll", await notesStore.getAll())
 
-    console.log("create", await noteStore.create({ id: 1, title: 'Vanille'}))
-    console.log("getAll", await noteStore.getAll())
+    console.log("create", await notesStore.create({ id: 1, title: 'Vanille'}))
+    console.log("getAll", await notesStore.getAll())
 
-    console.log("update", await noteStore.update({ id: 1, title: "Schocko" }))
-    console.log("getAll", await noteStore.getAll())
+    console.log("update", await notesStore.update({ id: 1, title: "Schoko" }))
+    console.log("getAll", await notesStore.getAll())
 
-    console.log("get 1", await noteStore.get(1))
+    console.log("get 1", await notesStore.get(1))
 
-    console.log("delete", await noteStore.delete(1));
-    console.log("getAll", await noteStore.getAll())
+    console.log("delete", await notesStore.delete(1));
+    console.log("getAll", await notesStore.getAll())
 
-    console.log("deleteAll", await noteStore.deleteAll());
-    console.log("getAll", await noteStore.getAll())
+    console.log("deleteAll", await notesStore.deleteAll());
+    console.log("getAll", await notesStore.getAll())
 
     console.log("all tests done")
 }
 
-//setTimeout(tests, 1);
+tests();
+*/

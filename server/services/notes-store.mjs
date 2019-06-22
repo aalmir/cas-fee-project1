@@ -25,7 +25,7 @@ class Note {
     }
 }
 
-export class NoteStore {
+export class NotesStore {
     constructor(db) {
         this.db = db || new Datastore({
             filename: './server/data/notes.db',
@@ -62,4 +62,4 @@ export class NoteStore {
     
 }
 
-export const noteStore = new NoteStore();
+export const notesStore = new NotesStore();
