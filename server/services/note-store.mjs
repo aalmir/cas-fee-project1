@@ -1,6 +1,6 @@
 import Datastore from 'nedb-promise'
 
-export class Note {
+class Note {
     constructor(id) {
         id = Number(id);
 
@@ -13,14 +13,14 @@ export class Note {
         this.done = false;
     }
 
-    static convertFromJson(noteDto) {
-        const note = new Note(noteDto.id);
-        note.title = noteDto.title;
-        note.description = noteDto.description;
-        note.priority = noteDto.priority;
-        note.dueDate = noteDto.dueDate ? new Date(noteDto.dueDate) : null;
-        note.createdDate = new Date(noteDto.createdDate);
-        note.done = noteDto.done;
+    static convertFromJson(json) {
+        const note = new Note(json.id);
+        note.title = json.title || note.title;
+        note.description = json.description || note.description;
+        note.priority = json.priority || note.priority;
+        note.dueDate = json.dueDate ? new Date(json.dueDate) : note.dueDate;
+        note.createdDate = json.createdDate ? new Date(json.createdDate) : note.createdDate;
+        note.done = json.done ||note.done;
         return note;
     }
 }
@@ -33,32 +33,33 @@ export class NoteStore {
         });
     }
 
-    async all() {
+    async getAll() {
         return await this.db.cfind().exec();
     }
 
-    async add(noteDto) {
-        //const note = Note.convertFromJson(noteDto);
-        console.log(noteDto);
-        const dbResult = await this.db.insert(noteDto);
-        console.log(dbResult);
+    async get(id) {
+        return await this.db.findOne({ id: id });
+    }
+
+    async create(noteDto) {
+        const note = Note.convertFromJson(noteDto);
+        const dbResult = await this.db.insert(note);
         return dbResult;
     }
 
-    async update(id) {
-        await this.db.update({ _id: id }, { $set: { "state": "DELETED" } });
-        return await this.get(id);
+    async update(noteDto) {
+        const note = Note.convertFromJson(noteDto);
+        return await this.db.update({ id: note.id }, { $set: note });
     }
 
     async delete(id) {
-        await this.db.update({ _id: id }, { $set: { "state": "DELETED" } });
-        return await this.get(id);
+        return await this.db.remove({ id: id }, { multi: true });
     }
 
-    async get(id) {
-        return await this.db.findOne({ _id: id });
+    async deleteAll() {
+        return await this.db.remove({ }, { multi: true });
     }
-
+    
 }
 
 export const noteStore = new NoteStore();

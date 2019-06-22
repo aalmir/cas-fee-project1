@@ -110,7 +110,7 @@ h1 {
 /* List */
 
 .debug-buttons {
-    margin-top: 4em;
+    margin-bottom: 0.5em;
     padding: 4px;
     font-size: 0.7em;
     border: 1px solid black;

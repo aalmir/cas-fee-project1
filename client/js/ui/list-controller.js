@@ -77,8 +77,8 @@ export class ListController {
                     this.router.showCreateForm();
                     break;
 
-                case 'seed':
-                    await this.noteService.seed();
+                case 'fill-samples':
+                    await this.noteService.fillSampleData();
                     await this.renderList();
                     break;
 

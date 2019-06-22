@@ -15,6 +15,17 @@
         <h1>
             Notes
         </h1>
+        {{#if viewState.showDebug}}
+        <div class="button-panel debug-buttons">
+            Debug: 
+            <button type="button" class="button action-button" data-command="clear">Clear all</button>
+            <button type="button" class="button action-button" data-command="fill-samples">Add 3</button>
+            <button type="button" class="button navigation-button" data-command="load">Load</button>
+            <button type="button" class="button navigation-button" data-command="home">Home-URL</button>
+            Length: 
+            {{notes.length}}
+        </div>
+        {{/if}}
         <div class="button-panel list-head-row">
             <div class="list-head-item list-action-buttons">
                 <button type="button" class="button action-button" data-command="create">
@@ -69,23 +80,12 @@
                         {{nl2br description}}
                     </div>
                     <div class="created-date">
-                        Created {{dateFormat createdDate}}
+                        Created {{dateFormat createdDate}}, ID {{id}}
                     </div>
                 </div>
             </li>
             {{/each}}
         </ul>
-        {{#if viewState.showDebug}}
-        <div class="button-panel debug-buttons">
-            Debug: 
-            <button type="button" class="button action-button" data-command="seed">Seed</button>
-            <button type="button" class="button action-button" data-command="clear">Clear</button>
-            <button type="button" class="button navigation-button" data-command="load">Load</button>
-            <button type="button" class="button navigation-button" data-command="home">Home-URL</button>
-            Length: 
-            {{notes.length}}
-        </div>
-        {{/if}}
     </script>
 
     <script id="notes-form-template" type="text/x-handlebars-template">

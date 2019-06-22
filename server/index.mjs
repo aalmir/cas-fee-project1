@@ -31,5 +31,31 @@ app.use(function (err, req, res, next) {
 const hostname = '127.0.0.1';
 const port = 3001;
 app.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+    console.log(`Server running at http://${hostname}:${port}/`);    
 });
+
+import { noteStore } from './services/note-store';
+
+async function tests() {
+    console.log('test');
+
+    console.log("getAll", await noteStore.getAll())
+
+    console.log("create", await noteStore.create({ id: 1, title: 'Vanille'}))
+    console.log("getAll", await noteStore.getAll())
+
+    console.log("update", await noteStore.update({ id: 1, title: "Schocko" }))
+    console.log("getAll", await noteStore.getAll())
+
+    console.log("get 1", await noteStore.get(1))
+
+    console.log("delete", await noteStore.delete(1));
+    console.log("getAll", await noteStore.getAll())
+
+    console.log("deleteAll", await noteStore.deleteAll());
+    console.log("getAll", await noteStore.getAll())
+
+    console.log("all tests done")
+}
+
+//setTimeout(tests, 1);

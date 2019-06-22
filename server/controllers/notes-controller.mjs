@@ -3,27 +3,29 @@ import { noteStore } from '../services/note-store'
 export class NotesController {
 
     async getNotes(req, res) {
-        res.json((await noteStore.all() || []))
+        res.json((await noteStore.getAll() || []))
     };
 
     async getNote(req, res) {
-        res.json(await noteStore.get(req.params.id));
+        const id = parseInt(req.params.id);
+        res.json(await noteStore.get(id));
     };
 
     async createNote(req, res) {
-        console.log('createNote');
-        const merde = req.body[0];
-        console.log(merde)
-        const result = await noteStore.add(merde);
-        res.json(result);
+        res.json(await noteStore.create(req.body));
     };
 
     async updateNote(req, res) {
-        res.json(await noteStore.update(req.body.name));
+        res.json(await noteStore.update(req.body));
     };
 
     async deleteNote(req, res) {
-        res.json(await noteStore.delete(req.params.id));
+        const id = parseInt(req.params.id);
+        res.json(await noteStore.delete(id));
+    };
+
+    async deleteAllNotes(req, res) {
+        res.json(await noteStore.deleteAll());
     };
 }
 

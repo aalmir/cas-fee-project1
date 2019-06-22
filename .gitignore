@@ -3,5 +3,7 @@ build
 npm-debug.log
 public/libs
 
+*.db
+
 .env
 .DS_Store

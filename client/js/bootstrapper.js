@@ -24,6 +24,7 @@ class Bootstrapper {
 
         const httpHelper = new HttpHelper();
         const notesStore = new RestNotesStore(httpHelper);
+        //const notesStore = new LocalNotesStore();
         const noteService = new NoteService(notesStore); 
 
         const router = new Router();

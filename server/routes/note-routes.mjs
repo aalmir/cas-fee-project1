@@ -19,9 +19,11 @@ router.get("/:id/", catchAsyncErrors((req, res, next) =>
 
 router.post("/", catchAsyncErrors((req, res, next) => 
         notesController.createNote(req, res, next)));
-router.patch("/:id/", catchAsyncErrors((req, res, next) => 
+router.put("/:id/", catchAsyncErrors((req, res, next) => 
         notesController.updateNote(req, res, next)));
 router.delete("/:id/", catchAsyncErrors((req, res, next) => 
         notesController.deleteNote(req, res, next)));
+router.delete("/", catchAsyncErrors((req, res, next) => 
+        notesController.deleteAllNotes(req, res, next)));
 
 export const noteRoutes = router;

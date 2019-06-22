@@ -6,6 +6,7 @@ export class NoteService {
     constructor(notesStore) {
         this.notesStore = notesStore;
         this.notesCache = null;
+        this.maxId = null;
     }
 
     async getNotes(sortOrder, showDone) {
@@ -23,51 +24,51 @@ export class NoteService {
 
     async addNote(updateFunc) {
         const notes = await this.lazyGetAll();
-
-        const maxId = notes.length == 0 ? 0 : Math.max(...notes.map(x => x.id));
-
-        const note = new Note(maxId + 1);
-        note.createdDate = new Date();
-        note.done = false
-
+        const note = new Note(++this.maxId);
         updateFunc(note);
-
         notes.push(note);
-        this.saveAll();
+        await this.notesStore.createNote(note);
     }
 
     async updateNote(id, updateFunc) {
         const note = await this.findNote(id);
         updateFunc(note);
-
-        this.saveAll();
+        await this.notesStore.updateNote(note);
     }
 
     async toggleDone(id) {
         const note = await this.findNote(id);
-        if (!note) {
-            return false;
-        }
         note.done = !note.done;
-        this.saveAll();
+        await this.notesStore.updateNote(note);
     }
 
     async deleteNote(id) {
-        const notes = await this.lazyGetAll();
-        this.notesCache = notes.filter(x => x.id !== parseInt(id));
-        await this.saveAll();
+        id = parseInt(id);
+        await this.notesStore.deleteNote(id);
+        await this.loadAll();
     }
 
     async clear() {
         this.notesCache = [];
-        await this.saveAll();
+        await this.notesStore.deleteAllNotes();
     }
 
-    async seed() {
-        this.notesCache = StaticData.getSampleData().map(Note.convertFromJson);
-        await this.saveAll();
+    async fillSampleData() {
+        for(const noteDto of StaticData.getSampleData()) {
+            const updateFunc = note => {
+                note.title = noteDto.title;
+                note.description = noteDto.description;
+                note.priority = noteDto.priority;
+                note.dueDate = noteDto.dueDate ? new Date(noteDto.dueDate) : null;
+            }
+            await this.addNote(updateFunc)
+        }
     }
 
+    /*
+     * Inhalt vom Cache vom Speicher befüllen, oder falls bereits 
+     * geschehen, den Cache-Inhalt zurückgeben
+     */
     async lazyGetAll() {
         if(this.notesCache === null) {
             await this.loadAll();
@@ -75,13 +76,13 @@ export class NoteService {
         return this.notesCache;
     }
 
+    /*
+     * Cache vom Speicher befüllen
+     */
     async loadAll() {
-        var dto = await this.notesStore.loadAllNotes();
+        var dto = await this.notesStore.getNotes();
         this.notesCache = dto.map(Note.convertFromJson);
-    }
-
-    async saveAll() {
-        await this.notesStore.saveAllNotes(this.notesCache);
+        this.maxId = this.notesCache.length == 0 ? 0 : Math.max(...this.notesCache.map(x => x.id));
     }
 
 }

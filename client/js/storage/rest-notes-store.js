@@ -4,30 +4,28 @@ export class RestNotesStore {
         this.httpHelper = httpHelper;
     }
 
-    async loadAllNotes() {
+    async getNotes() {
         return await this.httpHelper.ajax("GET", "/notes/");
     }
     
-    async saveAllNotes(notes) {
-        await this.httpHelper.ajax("POST", "/notes/", notes);
-    }
-    
-    /*
     async getNote(id) {
         return await this.httpHelper.ajax("GET", `/notes/${id}`);
     }
 
-    async createNote(...) {
-        return await this.httpHelper.ajax("POST", "/notes/", { ... });
+    async createNote(note) {
+        return await this.httpHelper.ajax("POST", "/notes/", note);
     }
 
-    async updateNote(...) {
-        return await this.httpHelper.ajax("PATCH", `/notes/${id}`);
+    async updateNote(note) {
+        return await this.httpHelper.ajax("PUT", `/notes/${note.id}`, note);
     }
 
-    async deleteNote(...) {
+    async deleteNote(id) {
         return await this.httpHelper.ajax("DELETE", `/notes/${id}`);
     }
-    */
+
+    async deleteAllNotes() {
+        return await this.httpHelper.ajax("DELETE", `/notes/`);
+    }
 
 }
