@@ -110,7 +110,7 @@ h1 {
 /* List */
 
 .debug-buttons {
-    margin-bottom: 0.5em;
+    margin-bottom: 1.5em;
     padding: 4px;
     font-size: 0.7em;
     border: 1px solid black;
@@ -250,6 +250,10 @@ body.dark-theme .button:hover {
     color: peachpuff;
 }
 
+body.dark-theme .debug-buttons {
+    border: 1px dotted white;
+}
+
 body.dark-theme .filter-button {
     color: gray;
 }
@@ -258,7 +262,8 @@ body.dark-theme ul.notes-list > li {
     background-color: black;
 }
 body.dark-theme ul.notes-list > li.done-true {
-    color: rgb(117, 112, 113);
+    color: rgb(177, 228, 142);
+    background-color: #222222;
 }
 
 .form-row, .form-row:last-child {
