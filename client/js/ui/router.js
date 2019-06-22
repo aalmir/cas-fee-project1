@@ -15,16 +15,17 @@ export class Router {
         this.formController = formController;
     }
 
-    showList() {
-        this.listController.renderList();
+
+    async showList() {
+        await this.listController.renderList();
     }
 
-    showEditForm(noteId) {
-        this.formController.renderEditForm(noteId);
+    async showEditForm(noteId) {
+        await this.formController.renderEditForm(noteId);
     }
 
-    showCreateForm() {
-        this.formController.renderCreateForm();
+    async showCreateForm() {
+        await this.formController.renderCreateForm();
     }
 
 }

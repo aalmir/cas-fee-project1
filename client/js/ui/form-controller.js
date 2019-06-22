@@ -19,7 +19,7 @@ export class FormController {
     }
 
     async renderEditForm(noteId) {
-        const note = await this.noteService.findNote(noteId);
+        const note = await this.noteService.getNote(noteId);
         const formModel = new FormModel(note.id.toString());
         formModel.title = note.title;
         formModel.description = note.description;
@@ -30,14 +30,14 @@ export class FormController {
         this.form.style.display = "block";
     }
 
-    renderCreateForm() {
+    async renderCreateForm() {
         const formModel = new FormModel("");
 
         this.form.innerHTML = this.formTemplate(formModel);
         this.form.style.display = "block";
     }
 
-    hideForm() {
+    async hideForm() {
         this.form.style.display = "none";
     }
 
@@ -53,19 +53,19 @@ export class FormController {
     }
 
 
-    formClickHandler(event) {
+    async formClickHandler(event) {
         const command = event.target.dataset.command;
         switch (command) {
             case 'cancel':
-                this.hideForm()
-                this.router.showList();
+                await this.hideForm()
+                await this.router.showList();
                 break;
             default:
                 break;
         }
     }
 
-    formSubmitHandler(event) {
+    async formSubmitHandler(event) {
         event.preventDefault();
         const form = event.target;
         const formModel = FormController.getFormModel(form);
@@ -76,20 +76,22 @@ export class FormController {
             note.dueDate = formModel.dueDate ? new Date(formModel.dueDate) : null;
         }
         if (formModel.id === "") {
-            this.noteService.addNote(updateFunc);
+            await this.noteService.addNote(updateFunc);
         }
         else {
             const noteId = parseInt(formModel.id);
-            this.noteService.updateNote(noteId, updateFunc);
+            await this.noteService.updateNote(noteId, updateFunc);
         }
         
-        this.hideForm()
-        this.router.showList();
+        await this.hideForm()
+        await this.router.showList();
     }
 
     initEventHandlers() {
-        this.form.addEventListener("click", this.formClickHandler.bind(this));
-        this.form.addEventListener("submit", this.formSubmitHandler.bind(this));
+        this.form.addEventListener("click", 
+            async event => this.formClickHandler(event));
+        this.form.addEventListener("submit", 
+            async event => this.formSubmitHandler(event));
     }
 
 }

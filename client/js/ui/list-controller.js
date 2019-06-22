@@ -5,9 +5,7 @@ import { Note } from "../services/note.js";
 
 export class ListController {
 
-    constructor(noteService, router, preferencesService) {
-        // Static config
-        const SHOW_DEBUG = true;
+    constructor(noteService, router, preferencesService, debugMode) {
 
         // Service
         this.noteService = noteService;
@@ -19,7 +17,7 @@ export class ListController {
         this.viewState = new ListViewState(
             this.preferencesService.getListSortOrder() || Note.SORT_ORDER().priority, 
             this.preferencesService.getListShowDone(), 
-            SHOW_DEBUG
+            debugMode
         );
        
         // Handlebars
@@ -61,8 +59,8 @@ export class ListController {
                     break;
 
                 case 'edit':
-                    this.hideList();
-                    this.router.showEditForm(noteId);
+                    await this.hideList();
+                    await this.router.showEditForm(noteId);
                     break;
 
                 case 'delete':
@@ -73,8 +71,8 @@ export class ListController {
                     break;
 
                 case 'create':
-                    this.hideList();
-                    this.router.showCreateForm();
+                    await this.hideList();
+                    await this.router.showCreateForm();
                     break;
 
                 case 'fill-samples':
@@ -87,15 +85,6 @@ export class ListController {
                     await this.renderList();
                     break;
 
-                case 'load':
-                    await this.noteService.loadAll();
-                    await this.renderList();
-                    break;
-
-                case 'home':
-                    window.location.href = './';
-                    break;
-
                 default:
                     alert(`unknown command: click event ${command}`);
                     break;
@@ -104,7 +93,7 @@ export class ListController {
     }
 
     async renderList() {
-        const notes = await this.noteService.getNotes(
+        const notes = await this.noteService.getNotesSorted(
             this.viewState.sortOrder, 
             this.viewState.showDone
         );
@@ -114,7 +103,7 @@ export class ListController {
         this.listContainer.style.display = "block";
     }
 
-    hideList() {
+    async hideList() {
         this.listContainer.style.display = "none";
     }
 

@@ -15,6 +15,9 @@ import { ListController } from './ui/list-controller.js';
 import { LayoutController } from "./ui/layout-controller.js";
 import { FormController } from "./ui/form-controller.js";
 
+const USE_REMOTE_STORAGE = true;
+const DEBUG_MODE = false;
+
 class Bootstrapper {
     static start() {
         HandlebarsHelpers.registerHelpers();
@@ -22,17 +25,21 @@ class Bootstrapper {
         const prefsStore = new LocalPrefsStore();
         const preferencesService = new PreferencesService(prefsStore);
 
-        const httpHelper = new HttpHelper();
-        const notesStore = new RestNotesStore(httpHelper);
-        //const notesStore = new LocalNotesStore();
-        const noteService = new NoteService(notesStore); 
+        let notesStore;
+        if (USE_REMOTE_STORAGE) {
+            notesStore = new RestNotesStore(new HttpHelper());
+        }
+        else {
+            notesStore = new LocalNotesStore();
+        }
+        const noteService = new NoteService(notesStore);
 
         const router = new Router();
 
         new LayoutController(preferencesService);
-        new ListController(noteService, router, preferencesService);
+        new ListController(noteService, router, preferencesService, DEBUG_MODE);
         new FormController(noteService, router);
-        
+
         router.showList();
     }
 }
