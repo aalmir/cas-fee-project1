@@ -36,53 +36,43 @@ export class ListController {
         if (command) {
             switch (command) {
                 case 'toggle-sort':
-                    const newSortOrder = event.target.dataset.sortOrder;
-                    if(newSortOrder !== this.viewState.sortOrder) {
-                        this.viewState.sortOrder = newSortOrder;
-                        this.preferencesService.setListSortOrder(newSortOrder);
-                        await this.renderList();
-                    }
+                    this.toggleSort(event.target.dataset.sortOrder);
                     break;
 
                 case 'toggle-show-done':
-                    const newShowDone = event.target.checked;
-                    if(newShowDone !== this.viewState.showDone) {
-                        this.viewState.showDone = newShowDone;
-                        this.preferencesService.setListShowDone(newShowDone);
-                        await this.renderList();
-                    }
+                    this.toggleShowDone(event.target.checked);
                     break;
 
                 case 'toggle-done':
                     await this.notesService.toggleDone(noteId)
-                    await this.renderList();
+                    this.renderList();
                     break;
 
                 case 'edit':
-                    await this.hideList();
-                    await this.router.showEditForm(noteId);
+                    this.hideList();
+                    this.router.showEditForm(noteId);
                     break;
 
                 case 'delete':
                     if (confirm("Do you really want to delete this note?")) {
                         await this.notesService.deleteNote(noteId)
-                        await this.renderList();
+                        this.renderList();
                     }
                     break;
 
                 case 'create':
-                    await this.hideList();
-                    await this.router.showCreateForm();
+                    this.hideList();
+                    this.router.showCreateForm();
                     break;
 
                 case 'fill-samples':
                     await this.notesService.fillSampleData();
-                    await this.renderList();
+                    this.renderList();
                     break;
 
                 case 'clear':
                     await this.notesService.clear();
-                    await this.renderList();
+                    this.renderList();
                     break;
 
                 default:
@@ -101,6 +91,22 @@ export class ListController {
         this.listContainer.innerHTML = this.listTemplate(listModel);
 
         this.listContainer.style.display = "block";
+    }
+
+    toggleSort(newSortOrder) {
+        if(newSortOrder !== this.viewState.sortOrder) {
+            this.viewState.sortOrder = newSortOrder;
+            this.preferencesService.setListSortOrder(newSortOrder);
+            this.renderList();
+        }
+    }
+
+    toggleShowDone(newShowDone) {
+        if(newShowDone !== this.viewState.showDone) {
+            this.viewState.showDone = newShowDone;
+            this.preferencesService.setListShowDone(newShowDone);
+            this.renderList();
+        }
     }
 
     async hideList() {

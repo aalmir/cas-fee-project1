@@ -27,6 +27,7 @@
     "nedb-promise": "^2.0.1"
   },
   "devDependencies": {
+    "eslint": "^6.0.0",
     "nodemon": "^1.19.1"
   }
 }

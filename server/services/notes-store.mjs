@@ -1,28 +1,19 @@
 import Datastore from 'nedb-promise'
 
-class Note {
-    constructor(id) {
-        id = Number(id);
-
-        this.id = id;
-        this.title = "New note";
-        this.description = "";
-        this.priority = 1;
-        this.dueDate = null;
-        this.createdDate = new Date();
-        this.done = false;
-    }
-
-    static convertFromJson(json) {
-        const note = new Note(json.id);
-        note.title = json.title || note.title;
-        note.description = json.description || note.description;
-        note.priority = json.priority || note.priority;
-        note.dueDate = json.dueDate ? new Date(json.dueDate) : note.dueDate;
-        note.createdDate = json.createdDate ? new Date(json.createdDate) : note.createdDate;
-        note.done = json.done ||note.done;
-        return note;
-    }
+/*
+ * A note ready to be written into the database. 
+ * Fills missing values, ensures expected types. 
+ */
+class NoteEntry {
+    constructor(json) {
+        this.id = Number(json.id);
+        this.title = json.title || "Untitled";
+        this.description = json.description || null;
+        this.priority = json.priority || 1;
+        this.dueDate = json.dueDate ? new Date(json.dueDate) : null;
+        this.createdDate = json.createdDate ? new Date(json.createdDate) : new Date();
+        this.done = json.done || false;
+   }
 }
 
 export class NotesStore {
@@ -42,14 +33,14 @@ export class NotesStore {
     }
 
     async create(noteDto) {
-        const note = Note.convertFromJson(noteDto);
-        const dbResult = await this.db.insert(note);
+        const entry = new NoteEntry(noteDto);
+        const dbResult = await this.db.insert(entry);
         return dbResult;
     }
 
     async update(noteDto) {
-        const note = Note.convertFromJson(noteDto);
-        return await this.db.update({ id: note.id }, { $set: note });
+        const entry = new NoteEntry(noteDto);
+        return await this.db.update({ id: entry.id }, { $set: entry });
     }
 
     async delete(id) {
