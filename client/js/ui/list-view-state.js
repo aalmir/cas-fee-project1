@@ -1,7 +1,6 @@
 export class ListViewState {
-    constructor(sortOrder, showDone, showDebug) {
+    constructor(sortOrder, showDone) {
         this.sortOrder = sortOrder;
         this.showDone = showDone;
-        this.showDebug = showDebug;
     }
 }

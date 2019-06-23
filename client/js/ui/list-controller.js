@@ -5,7 +5,7 @@ import { Note } from "../services/note.js";
 
 export class ListController {
 
-    constructor(notesService, router, preferencesService, debugMode) {
+    constructor(notesService, router, preferencesService) {
 
         // Service
         this.notesService = notesService;
@@ -16,8 +16,7 @@ export class ListController {
         // State
         this.viewState = new ListViewState(
             this.preferencesService.getListSortOrder() || Note.SORT_ORDER().priority, 
-            this.preferencesService.getListShowDone(), 
-            debugMode
+            this.preferencesService.getListShowDone()
         );
        
         // Handlebars
@@ -71,8 +70,10 @@ export class ListController {
                     break;
 
                 case 'clear':
-                    await this.notesService.clear();
-                    this.renderList();
+                    if (confirm("Do you really want to delete ALL notes?")) {
+                        await this.notesService.clear();
+                        this.renderList();
+                    }
                     break;
 
                 default:

@@ -1,5 +1,4 @@
 export class HandlebarsHelpers {
-
     static registerHelpers() {
         Handlebars.registerHelper('dateFormat', function (value) {
             // Datumsformatierung '1.12.2000', 'today'
@@ -17,7 +16,7 @@ export class HandlebarsHelpers {
 
             const oneDay =  24 * 60 * 60 * 1000;
 
-            if(nowTime == dateTime) {
+            if(nowTime === dateTime) {
                 return "today";
             }
             else if (nowTime + oneDay === dateTime) {

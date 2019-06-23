@@ -16,7 +16,6 @@ import { LayoutController } from "./ui/layout-controller.js";
 import { FormController } from "./ui/form-controller.js";
 
 const USE_REMOTE_STORAGE = true;
-const DEBUG_MODE = true;
 
 class Bootstrapper {
     static start() {
@@ -37,7 +36,7 @@ class Bootstrapper {
         const router = new Router();
 
         new LayoutController(preferencesService);
-        new ListController(notesService, router, preferencesService, DEBUG_MODE);
+        new ListController(notesService, router, preferencesService);
         new FormController(notesService, router);
 
         router.showList();

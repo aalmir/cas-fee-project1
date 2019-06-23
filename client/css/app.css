@@ -119,11 +119,6 @@ h1 {
 
 /* List */
 
-.debug-buttons {
-    margin: 1em auto 2em auto;
-    font-size: 0.7em;
-    color: forestgreen;
-}
 
 .list-head-row {
     display: flex;
@@ -197,6 +192,12 @@ ul.notes-list > li.empty-list-placeholder {
 .created-date {
     font-size: 0.7em;
     padding-top: 0.7em;
+}
+
+.advanced-buttons {
+    font-size: 0.7em; 
+    padding-top: 0.7em;
+    text-align: right;
 }
 
 
