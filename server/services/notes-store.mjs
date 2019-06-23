@@ -13,6 +13,7 @@ class NoteEntry {
         this.dueDate = json.dueDate ? new Date(json.dueDate) : null;
         this.createdDate = json.createdDate ? new Date(json.createdDate) : new Date();
         this.done = json.done || false;
+        this.doneDate = json.doneDate ? new Date(json.doneDate) : null;
     }
 }
 
@@ -25,7 +26,7 @@ export class NotesStore {
     }
 
     async getAll() {
-        return await this.db.cfind().exec();
+        return await this.db.find({ });
     }
 
     async get(id) {

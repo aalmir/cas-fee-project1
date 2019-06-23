@@ -43,6 +43,11 @@ export class NotesService {
     async toggleDone(id) {
         const note = await this.getNote(id);
         note.done = !note.done;
+        if(note.done) {
+            note.doneDate = new Date();
+        } else {
+            note.doneDate = null;
+        }
         await this.notesStore.updateNote(note);
     }
 

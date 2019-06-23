@@ -63,7 +63,7 @@
                     <label class="button action-button">
                         <input type="checkbox" data-command="toggle-done" data-note-id="{{id}}" 
                         title="Toggle done" {{checkedwhen done true}}>
-                        Is Done
+                        Is Done {{dateFormat doneDate}}
                     </label>
                     <button type="button" class="button action-button" data-command="edit" data-note-id="{{id}}">Edit</button>
                     <button type="button" class="button action-button" data-command="delete" data-note-id="{{id}}">Delete</button>
@@ -84,7 +84,8 @@
                         {{nl2br description}}
                     </div>
                     <div class="created-date">
-                        Created {{dateFormat createdDate}}, ID {{id}}
+                        [ID {{id}}]
+                        Created {{dateFormat createdDate}}
                     </div>
                 </div>
             </li>

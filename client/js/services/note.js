@@ -9,7 +9,7 @@ export class Note {
         this.dueDate = null;
         this.createdDate = new Date();
         this.done = false;
-
+        this.doneDate = null;
     }
 
 
@@ -50,6 +50,7 @@ export class Note {
         note.dueDate = noteDto.dueDate ? new Date(noteDto.dueDate) : null;
         note.createdDate = new Date(noteDto.createdDate);
         note.done = noteDto.done;
+        note.doneDate = noteDto.doneDate ? new Date(noteDto.doneDate) : null;
         return note;
     }
 }
