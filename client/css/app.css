@@ -160,6 +160,10 @@ ul.notes-list > li.done-true {
     background-color: honeydew;
 }
 
+ul.notes-list > li.done-true .note-priority {
+    border-color: transparent;
+}
+
 ul.notes-list > li.empty-list-placeholder {
     color: gray;
 }
@@ -252,6 +256,14 @@ label.priority-option {
     border-color: tan;
 }
 
+.prio-4 {
+    border-color: gainsboro;
+}
+
+.prio-5 {
+    border-color: gainsboro;
+}
+
 /* Themes */
 
 body.dark-theme {
@@ -292,7 +304,7 @@ body.dark-theme ul.notes-list > li {
     background-color: black;
 }
 body.dark-theme ul.notes-list > li.done-true {
-    color: rgb(177, 228, 142);
+    color: gray;
     background-color: #222222;
 }
 
