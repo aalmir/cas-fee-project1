@@ -79,6 +79,7 @@ h1 {
 .filter-button {
     color: darkslateblue;
 }
+
 /* Layout */
 
 #layout-header {
@@ -151,14 +152,6 @@ ul.notes-list > li:last-child {
     border-bottom: 1px solid silver;
 }
 
-ul.notes-list > li.done-true {
-    background-color: honeydew;
-}
-
-ul.notes-list > li.done-true .note-priority {
-    border-color: transparent;
-}
-
 ul.notes-list > li.empty-list-placeholder {
     color: gray;
 }
@@ -176,19 +169,23 @@ ul.notes-list > li.empty-list-placeholder {
     font-size: 1em;
     margin: 0;
     flex: 1 1 auto;
+    padding-right: 0.3em;
+}
+
+.note-title-row > .note-due {
+    flex: 0 0 8em;
 }
 
 .note-title-row > .note-priority {
-    flex: 0 1 4em;
+    flex: 0 0 4em;
+}
+
+.note-title-row > .note-priority > div {
     text-align: center;
     border-width: 1px;
     border-style: solid;
 }
 
-.note-title-row > .note-due {
-    padding-left: 0.4em;
-    flex: 0 1 8em;
-}
 .created-date {
     font-size: 0.7em;
     padding-top: 0.7em;
@@ -261,6 +258,14 @@ label.priority-option {
     border-color: gainsboro;
 }
 
+ul.notes-list > li.done-true {
+    background-color: honeydew;
+}
+
+ul.notes-list > li.done-true .note-priority {
+    border-color: transparent;
+}
+
 .prio-5 {
     border-color: gainsboro;
 }
@@ -315,8 +320,30 @@ body.dark-theme ul.notes-list > li.done-true {
 
 /* Small screens */
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
+    #layout-header {
+        font-size: 14px;
+        padding: 5px 5px;
+    }
+
+    #layout-footer {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    #content {
+        margin: 10px 5px;
+    }
     .list-head-item {
         white-space: normal;
+    }
+    .description {
+        font-size: 0.8em;
+    }
+    .note-title-row {
+        flex-wrap: wrap-reverse;
+    }
+    .note-title-row > h1 {
+        flex-basis: 100%;
     }
 }

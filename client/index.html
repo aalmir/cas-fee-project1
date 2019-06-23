@@ -64,11 +64,13 @@
                         <div class="note-due">
                             {{#if dueDate}}Due {{dateFormat dueDate}}{{/if}}
                         </div>
-                        <div class="note-priority prio-{{priority}}">
-                            Prio {{priority}}
+                        <div class="note-priority">
+                            <div class="prio-{{priority}}">
+                                Prio {{priority}}
+                            </div>
                         </div>
                     </div>
-                    <div>
+                    <div class=description>
                         {{nl2br description}}
                     </div>
                     <div class="created-date">
@@ -149,7 +151,6 @@
     <header id="layout-header">
         <h1>Blue Notes App</h1>
         <div id="theme-control">
-            Theme:
             <select>
                 <option value="bright-theme">Bright</option>
                 <option value="dark-theme">Dark</option>
