@@ -2,20 +2,25 @@ export class StaticData {
     static getSampleData() {
         return [
             {
-                "title": "Vanille-Glacé",
-                "priority": 1,
-                "dueDate": new Date(2019, 7, 7),
-            },
-            {
-                "title": "Schokoladensauce",
+                "title": "Velo flicken",
                 "priority": 2,
-                "dueDate": null,
+                "dueDate": new Date(),
             },
             {
-                "title": "Salat",
-                "description": "Lorem ipsum dolor\nSit amet",
-                "priority": 3,
-                "dueDate": new Date(2019, 8, 2),
+                "title": "Wohnung putzen",
+                "priority": 5,
+                "dueDate": null
+            },
+            {
+                "title": "Abgabe Projekt 1",
+                "description": `Branch erstellen mit dem Namen «Abgabe»
+                                E-Mail erstellen mit folgendem Inhalt:
+                                - Subject: [CAS FEE] Abgabe {{Gruppennummer}}
+                                - Link zum Branch
+                                - Ein ReadMe auf GitHub, falls dieses notwendig ist.
+                                `,
+                "priority": 1,
+                "dueDate": new Date(2019, 6, 2),
             }
         ];
     }
