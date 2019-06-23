@@ -16,7 +16,7 @@ import { LayoutController } from "./ui/layout-controller.js";
 import { FormController } from "./ui/form-controller.js";
 
 const USE_REMOTE_STORAGE = true;
-const DEBUG_MODE = false;
+const DEBUG_MODE = true;
 
 class Bootstrapper {
     static start() {

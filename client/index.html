@@ -12,6 +12,9 @@
     <script src="js/bootstrapper.js" type="module" defer></script>
 
     <script id="notes-list-template" type="text/x-handlebars-template">
+        <h1>
+            Notes
+        </h1>
         {{#if viewState.showDebug}}
         <div class="button-panel debug-buttons">
             <div>
@@ -24,9 +27,6 @@
             </div>
             </div>
         {{/if}}
-        <h1>
-            Notes
-        </h1>
         <div class="button-panel list-head-row">
             <div class="list-head-item list-action-buttons">
                 <button type="button" class="button action-button" data-command="create">
@@ -73,8 +73,11 @@
                         <h1>
                             {{title}}
                         </h1>
-                        <div class="note-properties">
-                            Prio {{priority}}{{#if dueDate}}, due {{dateFormat dueDate}}{{/if}}
+                        <div class="note-due">
+                            {{#if dueDate}}Due {{dateFormat dueDate}}{{/if}}
+                        </div>
+                        <div class="note-priority prio-{{priority}}">
+                            Prio {{priority}}
                         </div>
                     </div>
                     <div>
@@ -111,13 +114,13 @@
             <div class="form-row">
                 <div class="form-label">Prio</div>
                 <div class="form-value">
-                    <label>
+                    <label class="priority-option prio-1">
                         <input type="radio" name="priority" value="1" {{checkedwhen priority '1'}} required> 1
                     </label>
-                    <label>
+                    <label class="priority-option prio-2">
                         <input type="radio" name="priority" value="2" {{checkedwhen priority '2'}} required> 2
                     </label>
-                    <label>
+                    <label class="priority-option prio-3">
                         <input type="radio" name="priority" value="3" {{checkedwhen priority '3'}} required> 3
                     </label>
                 </div>
@@ -159,6 +162,10 @@
         <form id="notes-form"></form>
 
     </div>
+
+    <footer id="layout-footer">
+        CAS-FFE-2019 | Projekt1 | Urs van Binsbergen
+    </footer>
 
 </body>
 

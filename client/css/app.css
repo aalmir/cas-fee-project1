@@ -90,7 +90,7 @@ h1 {
 
 #layout-header > h1 {
     flex: 1;
-    font-size: 1em;
+    font-size: 1.25em;
     margin: 0;
     font-weight: normal;
     text-transform: uppercase
@@ -107,13 +107,22 @@ h1 {
     max-width: 700px;
 }
 
+#layout-footer {
+    margin: 7vh 20px 7vh 20px;
+    padding-top: 0.7em;
+    font-size: 12px;
+    color: forestgreen;
+    border-top: solid 1px forestgreen;
+    max-width: 700px;
+    text-transform: uppercase;
+}
+
 /* List */
 
 .debug-buttons {
-    margin-bottom: 1.5em;
-    padding: 4px;
+    margin: 1em auto 2em auto;
     font-size: 0.7em;
-    border: 1px solid black;
+    color: forestgreen;
 }
 
 .list-head-row {
@@ -156,7 +165,7 @@ ul.notes-list > li.empty-list-placeholder {
 }
 
 .note-content {
-    padding: 0.3em 0.8em;
+    padding: 0.3em 0.9em;
 }
 
 .note-title-row {
@@ -170,11 +179,17 @@ ul.notes-list > li.empty-list-placeholder {
     flex: 1 1 auto;
 }
 
-.note-title-row > .note-properties {
-    padding-left: 1em;
-    flex: 0 1 11em;
+.note-title-row > .note-priority {
+    flex: 0 1 4em;
+    text-align: center;
+    border-width: 1px;
+    border-style: solid;
 }
 
+.note-title-row > .note-due {
+    padding-left: 0.4em;
+    flex: 0 1 8em;
+}
 .created-date {
     font-size: 0.7em;
     padding-top: 0.7em;
@@ -215,9 +230,27 @@ ul.notes-list > li.empty-list-placeholder {
     font-size: 1em;
 }
 
+label.priority-option {
+    display: inline-block;
+    text-align: center;
+    border-width: 1px;
+    border-style: solid;
+    width: 3em;
+}
 
-/* Misc */
 
+/* Modifiers */
+.prio-1 {
+    border-color: red;
+}
+
+.prio-2 {
+    border-color: orange;
+}
+
+.prio-3 {
+    border-color: tan;
+}
 
 /* Themes */
 
@@ -250,9 +283,6 @@ body.dark-theme .button:hover {
     color: peachpuff;
 }
 
-body.dark-theme .debug-buttons {
-    border: 1px dotted white;
-}
 
 body.dark-theme .filter-button {
     color: gray;

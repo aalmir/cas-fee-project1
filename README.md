@@ -26,15 +26,16 @@ npm test
 
 ## Funktionsumfang
 
-Vorgabe der Schule:
+Vorgegebene Anforderungen:
 - Anzeigen, editieren und erfassen von Notizen
 - Sortieren von Notizen
 - Filtern von „abgeschlossenen" Notizen
 - Abspeichern der Daten auf dem Server
 - Wechseln des Styles
 
-## Spezielle Funktionen
+## Weitere Features
 
+- Responsive
 - Anzeigezustand (Theme, Sortierung, Filter) wird in LocalStorage gehalten
 - Konfigurierbare Storage für die Notizen-Daten (LocalStorage oder Remote)
 
