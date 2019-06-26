@@ -40,45 +40,44 @@
             </div>
         </div>
         <ul class="notes-list">
-            {{#unless notes.length}}
+            {{#each notes}}
+                <li class="done-{{done}}">
+                    <div class="button-panel note-button-row">
+                        <label class="button action-button">
+                            <input type="checkbox" data-command="toggle-done" data-note-id="{{id}}" 
+                            title="Toggle done" {{checkedwhen done true}}>
+                            Is Done {{dateFormat doneDate}}
+                        </label>
+                        <button type="button" class="button action-button" data-command="edit" data-note-id="{{id}}">Edit</button>
+                        <button type="button" class="button action-button" data-command="delete" data-note-id="{{id}}">Delete</button>
+                    </div>
+                    <div class="note-content">
+                        <div class="note-title-row">
+                            <h1>
+                                {{title}}
+                            </h1>
+                            <div class="note-due">
+                                {{#if dueDate}}Due {{dateFormat dueDate}}{{/if}}
+                            </div>
+                            <div class="note-priority">
+                                <div class="prio-{{priority}}">
+                                    Prio {{priority}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class=description>
+                            {{nl2br description}}
+                        </div>
+                        <div class="created-date">
+                            [ID {{id}}]
+                            Created {{dateFormat createdDate}}
+                        </div>
+                    </div>
+                </li>
+            {{else}}
                 <li class="empty-list-placeholder">
                     No notes to show
                 </li>
-            {{/unless}}
-            {{#each notes}}
-            <li class="done-{{done}}">
-                <div class="button-panel note-button-row">
-                    <label class="button action-button">
-                        <input type="checkbox" data-command="toggle-done" data-note-id="{{id}}" 
-                        title="Toggle done" {{checkedwhen done true}}>
-                        Is Done {{dateFormat doneDate}}
-                    </label>
-                    <button type="button" class="button action-button" data-command="edit" data-note-id="{{id}}">Edit</button>
-                    <button type="button" class="button action-button" data-command="delete" data-note-id="{{id}}">Delete</button>
-                </div>
-                <div class="note-content">
-                    <div class="note-title-row">
-                        <h1>
-                            {{title}}
-                        </h1>
-                        <div class="note-due">
-                            {{#if dueDate}}Due {{dateFormat dueDate}}{{/if}}
-                        </div>
-                        <div class="note-priority">
-                            <div class="prio-{{priority}}">
-                                Prio {{priority}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class=description>
-                        {{nl2br description}}
-                    </div>
-                    <div class="created-date">
-                        [ID {{id}}]
-                        Created {{dateFormat createdDate}}
-                    </div>
-                </div>
-            </li>
             {{/each}}
         </ul>
         <div class="button-panel advanced-buttons">
@@ -112,21 +111,12 @@
             <div class="form-row">
                 <div class="form-label">Prio</div>
                 <div class="form-value">
-                    <label class="priority-option prio-1">
-                        <input type="radio" name="priority" value="1" {{checkedwhen priority '1'}} required> 1
-                    </label>
-                    <label class="priority-option prio-2">
-                        <input type="radio" name="priority" value="2" {{checkedwhen priority '2'}} required> 2
-                    </label>
-                    <label class="priority-option prio-3">
-                        <input type="radio" name="priority" value="3" {{checkedwhen priority '3'}} required> 3
-                    </label>
-                    <label class="priority-option prio-4">
-                        <input type="radio" name="priority" value="4" {{checkedwhen priority '4'}} required> 4
-                    </label>
-                    <label class="priority-option prio-5">
-                        <input type="radio" name="priority" value="5" {{checkedwhen priority '5'}} required> 5
-                    </label>
+                    {{#for 1 6 1}}
+                    <label class="priority-option prio-{{this}}">
+                            <input type="radio" name="priority" value="{{this}}"
+                             {{checkedwhen ../priority this}} required> {{this}}
+                        </label>
+                    {{/for}}
                 </div>
             </div>
             <div class="form-row">
