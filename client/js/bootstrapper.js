@@ -22,7 +22,7 @@ class Bootstrapper {
     static start() {
         HandlebarsHelpers.registerHelpers();
 
-        const prefsStore = new LocalPrefsStore();
+        const prefsStore = new LocalPrefsStore(localStorage);
         const preferencesService = new PreferencesService(prefsStore);
 
         let notesStore;
@@ -35,13 +35,8 @@ class Bootstrapper {
 
         const router = new Router();
 
-        // eslint-disable-next-line no-new
         new LayoutController(preferencesService);
-
-        // eslint-disable-next-line no-new
         new ListController(notesService, router, preferencesService);
-
-        // eslint-disable-next-line no-new
         new FormController(notesService, router);
 
         router.showList();

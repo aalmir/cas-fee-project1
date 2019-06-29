@@ -1,16 +1,18 @@
-/* eslint-disable class-methods-use-this */
-
 export class LocalPrefsStore {
 
+    constructor(localStorage) {
+        this.localStorage = localStorage;
+    }
+
     getPreferences() {
-        const json = localStorage.getItem("prefs_v1") || "null";
+        const json = this.localStorage.getItem("prefs_v1") || "null";
         const preferences = JSON.parse(json);
         return preferences;
     }
 
     savePreferences(preferences) {
         const json = JSON.stringify(preferences);
-        localStorage.setItem("prefs_v1", json);
+        this.localStorage.setItem("prefs_v1", json);
     }
 
 }

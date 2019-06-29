@@ -18,6 +18,7 @@ module.exports = {
         "quotes": ["warn", "double"],
         "comma-dangle": ["error", "never"],
         "padded-blocks": ["warn", { "classes": "always" }],
+        "no-new": "off",
         "import/prefer-default-export": false,
         "import/extensions": false
     },

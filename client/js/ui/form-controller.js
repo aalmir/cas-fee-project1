@@ -69,18 +69,14 @@ export class FormController {
         event.preventDefault();
         const form = event.target;
         const formModel = FormController.getFormModel(form);
-        const updateFunc = (note) => {
-            note.title = formModel.title;
-            note.description = formModel.description;
-            note.priority = formModel.priority;
-            note.dueDate = formModel.dueDate ? new Date(formModel.dueDate) : null;
-        };
-        if (formModel.id === "") {
-            await this.notesService.addNote(updateFunc);
-        } else {
-            const noteId = parseInt(formModel.id, 10);
-            await this.notesService.updateNote(noteId, updateFunc);
-        }
+        const noteId = parseInt(formModel.id || "0", 10);
+        await this.notesService.createOrUpdateNote(
+            noteId,
+            formModel.title,
+            formModel.description,
+            formModel.priority,
+            formModel.dueDate
+        );
 
         await this.hideForm();
         await this.router.showList();

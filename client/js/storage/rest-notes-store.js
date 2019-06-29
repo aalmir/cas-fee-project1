@@ -16,6 +16,15 @@ export class RestNotesStore {
         return this.httpHelper.ajax("POST", "/notes/", note);
     }
 
+    async createNotes(notes) {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const note of notes) {
+            // eslint-disable-next-line no-await-in-loop
+            await this.httpHelper.ajax("POST", "/notes/", note);
+        }
+        return "OK";
+    }
+
     async updateNote(note) {
         return this.httpHelper.ajax("PUT", `/notes/${note.id}`, note);
     }

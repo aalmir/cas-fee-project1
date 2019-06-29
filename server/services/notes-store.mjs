@@ -1,10 +1,11 @@
-import Datastore from 'nedb-promise'
+import Datastore from "nedb-promise";
 
 /*
- * A note ready to be written into the database. 
- * Fills missing values, ensures expected types. 
+ * Note, as it is written into the database.
+ * (Fills missing values, ensures expected types).
  */
 class NoteEntry {
+
     constructor(json) {
         this.id = Number(json.id);
         this.title = json.title || "Untitled";
@@ -15,41 +16,49 @@ class NoteEntry {
         this.done = json.done || false;
         this.doneDate = json.doneDate ? new Date(json.doneDate) : null;
     }
+
 }
 
-export class NotesStore {
+class NotesStore {
+
     constructor(db) {
         this.db = db || new Datastore({
-            filename: './server/data/notes.db',
+            filename: "./server/data/notes.db",
             autoload: true
         });
     }
 
     async getAll() {
-        return await this.db.find({ });
+        return this.db.find({});
     }
 
     async get(id) {
-        return await this.db.findOne({ id: id });
+        return this.db.findOne({ id });
     }
 
-    async put(noteDto) {
+    async getMaxId() {
+        const notes = await this.getAll();
+        return notes.length === 0 ? 0 : Math.max(...notes.map(x => x.id));
+    }
+
+    async create(noteDto) {
         const entry = new NoteEntry(noteDto);
-        var existing = await this.get(entry.id);
-        if (existing === null) {
-            return await this.db.insert(entry);
-        }
-        else {
-            return await this.db.update({ id: entry.id }, { $set: entry });
-        }
+        entry.id = await this.getMaxId() + 1;
+        return this.db.insert(entry);
+    }
+
+    async update(id, noteDto) {
+        const entry = new NoteEntry(noteDto);
+        entry.id = id;
+        return this.db.update({ id }, { $set: entry });
     }
 
     async delete(id) {
-        return await this.db.remove({ id: id }, { multi: true });
+        return this.db.remove({ id }, { multi: true });
     }
 
     async deleteAll() {
-        return await this.db.remove({}, { multi: true });
+        return this.db.remove({}, { multi: true });
     }
 
 }

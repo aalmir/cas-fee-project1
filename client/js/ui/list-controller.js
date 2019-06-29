@@ -1,7 +1,6 @@
 import { HandlebarsHelpers } from "./handlebars-helpers.js";
 import { ListViewState } from "./list-view-state.js";
 import { ListModel } from "./list-model.js";
-import { Note } from "../services/note.js";
 
 export class ListController {
 
@@ -15,7 +14,7 @@ export class ListController {
 
         // State
         this.viewState = new ListViewState(
-            this.preferencesService.getListSortOrder() || Note.SORT_ORDER().priority,
+            this.preferencesService.getListSortOrder() || notesService.defaultSortOrder,
             this.preferencesService.getListShowDone()
         );
 
