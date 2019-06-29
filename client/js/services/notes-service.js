@@ -1,5 +1,5 @@
-import { StaticData } from '../data/static-data.js';
-import { Note } from './note.js';
+import { StaticData } from "../data/static-data.js";
+import { Note } from "./note.js";
 
 export class NotesService {
 
@@ -8,27 +8,27 @@ export class NotesService {
     }
 
     async getAllNotes() {
-        var dto = await this.notesStore.getNotes();
+        const dto = await this.notesStore.getNotes();
         return dto.map(Note.convertFromJson);
     }
 
     async getNotesSorted(sortOrder, showDone) {
         const notes = await this.getAllNotes();
-        const comparer = Note.getComparer(sortOrder)
+        const comparer = Note.getComparer(sortOrder);
         return [...notes]
             .filter(x => showDone || !x.done)
             .sort(comparer);
     }
 
     async getNote(id) {
-        id = parseInt(id);
-        var dto = await this.notesStore.getNote(id);
+        const idInt = parseInt(id, 10);
+        const dto = await this.notesStore.getNote(idInt);
         return Note.convertFromJson(dto);
     }
 
     async addNote(updateFunc) {
         const notes = await this.getAllNotes();
-        var maxId = this.getMaxId(notes);
+        const maxId = NotesService.getMaxId(notes);
         const note = new Note(maxId + 1);
         updateFunc(note);
         await this.notesStore.createNote(note);
@@ -43,7 +43,7 @@ export class NotesService {
     async toggleDone(id) {
         const note = await this.getNote(id);
         note.done = !note.done;
-        if(note.done) {
+        if (note.done) {
             note.doneDate = new Date();
         } else {
             note.doneDate = null;
@@ -52,8 +52,8 @@ export class NotesService {
     }
 
     async deleteNote(id) {
-        id = parseInt(id);
-        await this.notesStore.deleteNote(id);
+        const idInt = parseInt(id, 10);
+        await this.notesStore.deleteNote(idInt);
     }
 
     async clear() {
@@ -62,16 +62,20 @@ export class NotesService {
 
     async fillSampleData() {
         const notes = await this.getAllNotes();
-        var maxId = this.getMaxId(notes);
+        let maxId = NotesService.getMaxId(notes);
 
-        for(const noteDto of StaticData.getSampleData()) {
+        const sampleNotes = StaticData.getSampleData();
+        // eslint-disable-next-line no-restricted-syntax
+        for (const noteDto of sampleNotes) {
             const note = Note.convertFromJson(noteDto);
-            note.id = ++maxId
+            maxId += 1;
+            note.id = maxId;
+            // eslint-disable-next-line no-await-in-loop
             await this.notesStore.createNote(note);
         }
     }
-    
-    getMaxId(notes) {
+
+    static getMaxId(notes) {
         return notes.length === 0 ? 0 : Math.max(...notes.map(x => x.id));
     }
 

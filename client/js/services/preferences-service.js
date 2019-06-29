@@ -1,6 +1,7 @@
 import { Preferences } from "./preferences.js";
 
 export class PreferencesService {
+
     constructor(prefsStore) {
         this.prefStore = prefsStore;
         this.prefs = null;
@@ -34,6 +35,7 @@ export class PreferencesService {
         this.prefs.listShowDone = showDone;
         this.save();
     }
+
     load() {
         this.prefs = this.prefStore.getPreferences() || new Preferences();
     }

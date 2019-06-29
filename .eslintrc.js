@@ -4,7 +4,7 @@ module.exports = {
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": "airbnb",
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -14,8 +14,13 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-        "no-console": 1,
-    }, 
+        "indent": ["warn", 4, { "SwitchCase": 1 }],
+        "quotes": ["warn", "double"],
+        "comma-dangle": ["error", "never"],
+        "padded-blocks": ["warn", { "classes": "always" }],
+        "import/prefer-default-export": false,
+        "import/extensions": false
+    },
     "globals": {
         "Handlebars": "readonly",
     }

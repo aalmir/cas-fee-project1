@@ -3,6 +3,7 @@
  * can transfer control to the other.
  */
 export class Router {
+
     constructor() {
         this.listController = null;
         this.formController = null;

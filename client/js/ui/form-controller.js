@@ -54,10 +54,10 @@ export class FormController {
 
 
     async formClickHandler(event) {
-        const command = event.target.dataset.command;
+        const { command } = event.target.dataset;
         switch (command) {
-            case 'cancel':
-                await this.hideForm()
+            case "cancel":
+                await this.hideForm();
                 await this.router.showList();
                 break;
             default:
@@ -69,28 +69,27 @@ export class FormController {
         event.preventDefault();
         const form = event.target;
         const formModel = FormController.getFormModel(form);
-        const updateFunc = note => {
+        const updateFunc = (note) => {
             note.title = formModel.title;
             note.description = formModel.description;
             note.priority = formModel.priority;
             note.dueDate = formModel.dueDate ? new Date(formModel.dueDate) : null;
-        }
+        };
         if (formModel.id === "") {
             await this.notesService.addNote(updateFunc);
-        }
-        else {
-            const noteId = parseInt(formModel.id);
+        } else {
+            const noteId = parseInt(formModel.id, 10);
             await this.notesService.updateNote(noteId, updateFunc);
         }
-        
-        await this.hideForm()
+
+        await this.hideForm();
         await this.router.showList();
     }
 
     initEventHandlers() {
-        this.form.addEventListener("click", 
+        this.form.addEventListener("click",
             async event => this.formClickHandler(event));
-        this.form.addEventListener("submit", 
+        this.form.addEventListener("submit",
             async event => this.formSubmitHandler(event));
     }
 
