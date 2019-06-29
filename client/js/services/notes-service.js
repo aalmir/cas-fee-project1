@@ -72,7 +72,7 @@ export class NotesService {
     }
     
     getMaxId(notes) {
-        return notes.length == 0 ? 0 : Math.max(...notes.map(x => x.id));
+        return notes.length === 0 ? 0 : Math.max(...notes.map(x => x.id));
     }
 
 }

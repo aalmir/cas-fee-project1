@@ -19,13 +19,13 @@ export class LocalNotesStore {
     }
 
     async updateNote(note) {
-        this.notes = this.notes.filter(x => x.id != note.id);
+        this.notes = this.notes.filter(x => x.id !== note.id);
         this.notes.push(note);
         this.innerSave();
     }
 
     async deleteNote(id) {
-        this.notes = this.notes.filter(x => x.id != parseInt(id));
+        this.notes = this.notes.filter(x => x.id !== parseInt(id));
         this.innerSave();
     }
 
