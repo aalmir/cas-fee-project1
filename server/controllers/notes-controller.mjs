@@ -1,4 +1,4 @@
-import { notesStore } from "../services/notes-store";
+import { notesStore } from "../services/notes-store.mjs";
 
 export class NotesController {
 
@@ -28,4 +28,5 @@ export class NotesController {
     static async deleteAllNotes(req, res) {
         res.json(await notesStore.deleteAll());
     }
+
 }

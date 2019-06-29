@@ -1,5 +1,5 @@
 import express from "express";
-import { NotesController } from "../controllers/notes-controller";
+import { NotesController } from "../controllers/notes-controller.mjs";
 
 // Make sure to `.catch()` any errors and pass them along to the `next()`
 // middleware in the chain, in this case the error handler.
