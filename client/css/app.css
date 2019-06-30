@@ -97,7 +97,7 @@ h1 {
     text-transform: uppercase
 }
 
-#layout-header select {
+#layout-header select, #layout-header select > option {
     background-color: inherit;
     color: inherit;
     border-color: white;
@@ -291,7 +291,8 @@ body.dark-theme #layout-header {
     border-bottom: 1px solid gray;
 }
 
-body.dark-theme header.layout-header select {
+body.dark-theme #layout-header select,
+body.dark-theme #layout-header select > option {
     background-color: inherit;
     color: inherit;
     border-color: white;
