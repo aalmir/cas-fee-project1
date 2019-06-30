@@ -2,24 +2,26 @@
 
 Projektarbeit im Rahmen des CAS FEE 2019 an der HSR. 
 
-## Installation
+## Installieren
 
 ```bash
 npm install
 ```
 
-## Launch
+## Starten
 
 ```bash
 npm start
 ```
-or
+
+Oder um mit nodemon zu starten:
+
 ```bash
 npm run dev
 ```
-(using nodemon)
 
-To run some tests:
+Einige Tests ausführen:
+
 ```bash
 npm test
 ```
