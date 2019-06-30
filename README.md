@@ -8,6 +8,8 @@ Projektarbeit im Rahmen des CAS FEE 2019 an der HSR.
 npm install
 ```
 
+Auf Windows erscheint eine Warnung von fsevents zu einer optionalen Dependency. Diese kann ignoriert werden.
+
 ## Starten
 
 ```bash
@@ -26,6 +28,11 @@ Einige Tests ausführen:
 npm test
 ```
 
+## Kompatibilität UI
+
+- Getestet auf Chrome und Safari
+- Läuft nicht auf IE oder Edge
+
 ## Funktionsumfang
 
 Vorgegebene Anforderungen:
@@ -41,7 +48,7 @@ Vorgegebene Anforderungen:
 - Anzeigezustand (Theme, Sortierung, Filter) wird in LocalStorage gehalten
 - Konfigurierbare Storage für die Notizen-Daten (LocalStorage oder Remote)
 
-## Plattform
+## Technologieplattform
 
 - Node.js
 - Express
