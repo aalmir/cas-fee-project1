@@ -1,8 +1,8 @@
 {
-  "name": "cas-fee-notes-app",
+  "name": "cas-fee-project1",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "main": "server/index.mjs",
   "scripts": {
     "postinstall": "node postinstall.js",
     "start": "node --experimental-modules server/index.mjs",
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/urs-van-binsbergen/cas-fee-project1.git"
   },
-  "author": "",
+  "author": "Urs van Binsbergen",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/urs-van-binsbergen/cas-fee-project1/issues"
