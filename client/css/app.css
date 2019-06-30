@@ -293,8 +293,8 @@ body.dark-theme #layout-header {
 
 body.dark-theme #layout-header select,
 body.dark-theme #layout-header select > option {
-    background-color: inherit;
-    color: inherit;
+    background-color: black;
+    color: silver;
     border-color: white;
 }
 
