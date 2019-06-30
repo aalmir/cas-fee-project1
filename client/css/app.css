@@ -84,7 +84,7 @@ h1 {
 
 #layout-header {
     background-color: cornflowerblue;
-    color:whitesmoke;
+    color: whitesmoke;
     display: flex;
     padding: 10px 20px;
 }
@@ -98,8 +98,8 @@ h1 {
 }
 
 #layout-header select, #layout-header select > option {
-    background-color: inherit;
-    color: inherit;
+    background-color: cornflowerblue;
+    color: whitesmoke;
     border-color: white;
 }
 
